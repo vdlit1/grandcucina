@@ -1,0 +1,93 @@
+span.checkbox-custom,
+.checkbox {
+	width: 16px;
+	height: 17px;
+	padding: 0 5px 0 0;
+	background: url("../images/checkbox-bg.png") no-repeat;
+	display: block;
+	clear: left;
+	float: left;cursor: pointer;
+}
+a.checkbox-checked {
+	background-position: -160px -967px;
+}
+.radio {
+	background: url(../images/raido-img.png) no-repeat;
+	display: block;
+	clear: left;
+	float: left;
+	padding: 0 5px 0 0;
+	width: 15px;
+	height: 14px;cursor: pointer;
+}
+/* Drop down styles*/
+div.selectbox-wrapper {
+  position:absolute;
+  width:400px;
+  background-color:white;
+  border:1px solid #ccc;
+  margin:0px;
+  margin-top:-10px;
+  padding:0px;
+  text-align:left;
+  max-height:200px;
+  overflow:auto;
+}
+
+/*Drop down list styles*/
+div.selectbox-wrapper ul {
+  list-style-type:none;
+  margin:0px;
+  padding:0px;
+}
+/* Selected item in dropdown list*/
+div.selectbox-wrapper ul li.selected { 
+  background-color: #EAF2FB;
+}
+
+/* Hover state for dropdown list */
+div.selectbox-wrapper ul li.current { 
+  background-color: #CDD8E4;
+}
+
+/* Drop down list items style*/
+div.selectbox-wrapper ul li {
+  list-style-type:none;
+  display:block;
+  margin:0;
+  padding:2px;
+  cursor:pointer;
+}
+
+/* Look and feel of select box */
+.selectbox 
+{
+	background: url("../images/arrow-select.jpg") no-repeat scroll 97% center transparent;
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 0 5px #CCCCCC;
+    color: #959595;
+    cursor: pointer;
+    display: block;
+    font: 12px/28px Helvetica,Arial,sans-serif;
+    height: 26px;
+    margin: 0 5px 10px 0;
+    padding-left: 10px;
+    text-align: left;
+    width: 100%;
+}
+/* .select{ background: url("../images/arrow-select.jpg") no-repeat scroll 96% center #fff;
+    color: #959595;
+    cursor: pointer;
+    display: block;
+    font: 12px/28px Helvetica,Arial,sans-serif;
+    height: 28px;
+    outline: medium none;
+    padding-left: 10px;
+    text-decoration: none;width: 123px;overflow: hidden;position: absolute;
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 0 5px #CCCCCC;}
+select.custom-styled{cursor: pointer;
+    height: 30px;
+    width: 134px;background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #959595;}
+select.custom-styled option{padding:3px 10px;border-bottom: 1px solid #EFEFEF;} */	

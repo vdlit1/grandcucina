@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <tagimage_adminhtml_tagimage_index>
+      <!--  <reference name="content">
+            <block type="tagimage/adminhtml_tagimage" name="tagimage" />
+        </reference>-->
+    </tagimage_adminhtml_tagimage_index>
+    <default>
+        <reference name="head">
+            <action method="addJs"><script>tagimages/jquery.min.js</script></action>
+            <action method="addJs"><script>tagimages/jquery-ui.min.js</script></action>
+            <action method="addJs"><script>tagimages/jquery.tag.min.js</script></action>
+            <action method="addJs"><script>tagimages/jquery.noconflict.js</script></action>
+            <action method="addJs"><script>tagimages/slider.js</script></action>
+            <action method="addCss"><name>tagimages/jquery-ui.custom.css</name></action>
+            <action method="addCss"><name>tagimages/jquery.tag.css</name></action>
+            <action method="addCss"><name>tagimages/slider.css</name></action>
+           
+         </reference>
+    </default>
+</layout>

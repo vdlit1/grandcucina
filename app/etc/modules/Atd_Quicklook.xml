@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Atd_Quicklook>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Atd_Quicklook>
+    </modules>
+</config> 

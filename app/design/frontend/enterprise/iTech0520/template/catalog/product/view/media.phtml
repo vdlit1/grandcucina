@@ -1,0 +1,91 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+<div id="product-gallery">
+	<?php $_optionId = $_product->getGrandcucinaTicket();  //die('sdfsd');?>
+	<?php $_filename = Mage::getModel('optionimages/images')->getFileName2ImageImages($_optionId); ?>
+	<?php if($_filename!=''): ?>
+		<img src="<?php echo Mage::getBaseUrl('media').'image_color/'.$_filename ?>" id="sale-image-big" alt=""/>
+	<?php endif ?>
+	<div class="product-gallery-slides">
+		<ul class="gallery">
+			<li id="gallery-1">
+				<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(646, 580) ?>" width="646" height="580"/>
+				<a class="zoom" href="<?php echo $this->helper('catalog/image')->init($_product, 'image') ?>" rel="prettyPhoto[gallery1]">zoom</a>
+			</li>
+			
+			 <?php $i=1; foreach ($this->getGalleryImages() as $_image): $i++ ?>
+				 <?php if($i<=4): ?>
+				<li id="gallery-<?php echo $i ?>">
+					<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(646,580); ?>" alt="" height="580" width="646">
+					<a class="zoom" href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), '', $_image->getFile()); ?>" rel="prettyPhoto[gallery1]">zoom</a>
+				</li>
+				<?php endif ?>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+	<ul class="product-gallery-nav">
+		<li>
+			<a href="#gallery-1">
+				<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(98, 109) ?>" alt="" height="98" width="109">
+			</a>
+		</li>
+		<?php $i=1; foreach ($this->getGalleryImages() as $_image): $i++ ?>
+			<?php if($i<=4): ?>
+			<li>
+				<a href="#gallery-<?php echo $i ?>">
+					<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(109,98); ?>" alt="" height="98" width="109">
+				</a>
+			</li>
+			<?php endif ?>
+		<?php endforeach; ?>
+	</ul>
+	<div class="social-links">
+		<div class="facebook-link">
+			<iframe src="//www.facebook.com/plugins/like.php?href=<?php echo $_product->getProductUrl() ?>&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=21&amp;appId=351175961610818" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true"></iframe>
+		</div>
+		<div class="twitter-link">
+			<a href="http://twitter.com/?status=<?php echo urlencode($_product->getProductUrl()) ?>">
+				Tweet it
+			</a>
+		</div>
+		<div class="mail-friend-link">
+			<a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Tell a friend') ?></a>
+		</div>
+	</div>
+</div>
+
+<script src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>jq/main1.js"></script>

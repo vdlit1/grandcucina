@@ -1,0 +1,28 @@
+
+
+<?php $subCategory = $this->getCurrentChildCategories() ?>
+<?php $_collectionSize = count($subCategory) ?>
+<?php $_columnCount = 3; ?>
+
+	<div class="list-sub-category">
+            
+     <?php if($_collectionSize>0): ?> 
+	<?php $i=0; foreach($subCategory as $sub): ?>
+	<?php $_sub = Mage::getModel('catalog/category')->load($sub->getId()) ?>
+		<?php if ($i++%$_columnCount==0): ?>
+        <div class="category-line">
+        <?php endif ?>
+			<div class="category-info<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+				<?php if ($image = $_sub->getThumbnail()): ?>
+					<img src="<?php echo Mage::getBaseUrl('media').'catalog/category/'.$image; ?>" alt="<?php echo $_sub->getName() ?>"/>
+				<?php endif ?>
+				<div class="category-name-container">
+					<a href="<?php echo $this->getCategoryUrl($_sub) ?>"><?php echo $_sub->getName() ?></a>
+				</div>
+			</div>
+		<?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+        </div>
+        <?php endif ?>
+	<?php endforeach ?>
+            <?php endif ?>
+	</div>

@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Itech_Attributemanager>
+            <version>0.1.0</version>
+        </Itech_Attributemanager>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <attributemanager>
+                    <file>attributemanager.xml</file>
+                </attributemanager>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<attributemanager>
+				<use>admin</use>
+				<args>
+					<module>Itech_Attributemanager</module>
+					<frontName>attributemanager</frontName>
+				</args>
+			</attributemanager>
+        </routers>
+    </admin>
+    <adminhtml>
+	
+		<menu>
+			<catalog translate="title" module="catalog">
+				<children>
+					<attributes translate="title" module="catalog">
+						<title>Attributes</title>
+						<children>
+							<items module="attributemanager">
+								<title>Product Used By</title>
+								<action>attributemanager/adminhtml_attributemanager</action>
+							</items>
+						</children>
+						<sort_order>20</sort_order>
+					</attributes>
+				</children>
+			</catalog>
+		</menu>
+
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Itech_Attributemanager>
+							<title>Attributemanager Module</title>
+							<sort_order>10</sort_order>
+						</Itech_Attributemanager>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<attributemanager>
+					<file>attributemanager.xml</file>
+				</attributemanager>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <attributemanager>
+                <class>Itech_Attributemanager_Model</class>
+                <resourceModel>attributemanager_mysql4</resourceModel>
+            </attributemanager>
+            <attributemanager_mysql4>
+                <class>Itech_Attributemanager_Model_Mysql4</class>
+                <entities>
+                    <attributemanager>
+                        <table>attributemanager</table>
+                    </attributemanager>
+                </entities>
+            </attributemanager_mysql4>
+        </models>
+        <resources>
+            <attributemanager_setup>
+                <setup>
+                    <module>Itech_Attributemanager</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </attributemanager_setup>
+            <attributemanager_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </attributemanager_write>
+            <attributemanager_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </attributemanager_read>
+        </resources>
+        <blocks>
+            <attributemanager>
+                <class>Itech_Attributemanager_Block</class>
+            </attributemanager>
+        </blocks>
+        <helpers>
+            <attributemanager>
+                <class>Itech_Attributemanager_Helper</class>
+            </attributemanager>
+        </helpers>
+    </global>
+</config>

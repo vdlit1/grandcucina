@@ -1,0 +1,17 @@
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterSlider
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+.m-filter-slider { position: relative; background: url(../images/terminating-category/slider-bg.jpg) repeat-x left top; height: 10px; margin: 13px 0 11px 0; border: none;}
+.m-filter-slider > .m-slider-from, .m-filter-slider > .m-slider-to { height: 17px; width: 17px; position: absolute; }
+.m-filter-slider > .m-slider-span { height: 10px; position: absolute; background:url(../images/terminating-category/slider-range.jpg) repeat-x left top;}
+.m-filter-slider > .m-slider-from,
+.m-filter-slider > .m-slider-to {top: -0.5em; width: 13px; height: 27px; border: none; outline: none; border-radius: none;background:url(../images/terminating-category/slider-pin.jpg) repeat-x left top; }
+.m-slider-values {text-align: center; margin-top: 3px; display:inline-block; width:233px;} 
+.m-slider-values .m-slider-min-value { float: left; }
+.m-slider-values .m-slider-max-value { float: right;}
+.m-slider-selected-value {}
+#dimensions_length_diameter-track.m-filter-slider,#dimensions_height_depth-track.m-filter-slider{background:url("../images/slider-bg2.jpg") repeat-x scroll right bottom transparent;}
+#dimensions_length_diameter-track.m-filter-slider > .m-slider-span,#dimensions_height_depth-track.m-filter-slider > .m-slider-span{background:none repeat scroll 0 0 transparent;}

@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Atd_Tagimage>
+            <version>0.1.0</version>
+        </Atd_Tagimage>
+    </modules>
+    <frontend>
+        <routers>
+            <tagimage>
+                <use>standard</use>
+                <args>
+                    <module>Atd_Tagimage</module>
+                    <frontName>tagimage</frontName>
+                </args>
+            </tagimage>
+        </routers>
+        <layout>
+            <updates>
+                <tagimage>
+                    <file>tagimage.xml</file>
+                </tagimage>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<tagimage>
+				<use>admin</use>
+				<args>
+					<module>Atd_Tagimage</module>
+					<frontName>tagimage</frontName>
+				</args>
+			</tagimage>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<tagimage module="tagimage">
+				<title>Slider Pro</title>
+				<sort_order>71</sort_order>               
+				<children>
+					
+
+
+                                        <items0 module="tagimage">
+						<title>Category Images</title>
+						<sort_order>3</sort_order>
+						<action>tagimage/adminhtml_tagimage/category</action>
+					</items0>
+
+                                        <items1 module="tagimage">
+						<title>Manage Tags</title>
+						<sort_order>4</sort_order>
+						<action>tagimage/adminhtml_tags</action>
+					</items1>
+
+                                        <items module="tagimage">
+						<title>General Setting</title>
+						<sort_order>9</sort_order>
+						<action>adminhtml/system_config/edit/section/tags</action>
+					</items>
+
+
+
+				</children>
+			</tagimage>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Atd_Tagimage>
+							<title>Tagimage Module</title>
+							<sort_order>10</sort_order>
+						</Atd_Tagimage>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<tagimage>
+					<file>tagimage.xml</file>
+				</tagimage>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <tagimage>
+                <class>Atd_Tagimage_Model</class>
+                <resourceModel>tagimage_mysql4</resourceModel>
+            </tagimage>
+            <tagimage_mysql4>
+                <class>Atd_Tagimage_Model_Mysql4</class>
+                <entities>
+                    <tagimage>
+                        <table>tagimage</table>
+                    </tagimage>
+                    <tags>
+                        <table>tags</table>
+                    </tags>
+                    <page>
+                        <table>page</table>
+                    </page>
+                </entities>
+            </tagimage_mysql4>
+          <!--  <catalog_resource_eav_mysql4>
+                <rewrite>
+                    <product_collection>Atd_Tagimage_Model_Resource_Eav_Mysql4_Product_Collection</product_collection>
+                </rewrite>
+            </catalog_resource_eav_mysql4>-->
+
+        </models>
+        <resources>
+            <tagimage_setup>
+                <setup>
+                    <module>Atd_Tagimage</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </tagimage_setup>
+            <tagimage_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </tagimage_write>
+            <tagimage_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </tagimage_read>
+        </resources>
+        <blocks>
+            <tagimage>
+                <class>Atd_Tagimage_Block</class>
+            </tagimage>
+        </blocks>
+        <helpers>
+            <tagimage>
+                <class>Atd_Tagimage_Helper</class>
+            </tagimage>
+        </helpers>
+    </global>
+     <default>
+        <tags>
+            <general>
+                    <enabled>1</enabled>
+            </general>
+
+        </tags>
+    </default>
+</config>

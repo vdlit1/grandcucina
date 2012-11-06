@@ -1,0 +1,110 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_blank
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $_item = $this->getItem()?>
+<tr>
+    <td style="padding: 6px 0 6px 4px; width: 45px">
+		<a href="<?php echo $this->getProductUrl() ?>" class="product-image"  title="<?php echo $this->htmlEscape($this->getProductName()) ?>" onclick="return hs.htmlExpand(this, prodOptions('cart_img'))">
+			<img src="<?php echo $this->getProductThumbnail()->resize(40); ?>" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" />
+		</a>
+	</td>
+    <td style="width:130px; padding:6px 10px 6px 3px">
+        <h4><?php echo $this->getProductName() ?></h4>
+		
+        <b><i><?php echo $this->getQty() ?></i></b> x
+
+		<?php echo $this->helper('checkout')->formatPrice($_item->getCalculationPrice()) ?>
+
+    </td>
+  
+    <td style="text-align:right; padding: 6px 14px 6px 5px;" valign="top">
+		<?php if ($_options = $this->getOptionList()):?>
+       <table class="tbloption"> 
+	       	<tbody>
+	       		<?php foreach ($_options as $_option) : ?>
+	            <?php $_formatedOptionValue = $this->getFormatedOptionValue($_option) ?>
+			       <tr>
+				       <td></td>
+				       <td><i><?php echo $_formatedOptionValue['value'] ?></i></td>
+			       </tr>
+		        <?php endforeach; ?>
+		    </tbody>
+		</table>
+        <?php endif;?>	
+	
+    </td>
+    
+    <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+    <td style="text-align:center;">
+        <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
+            <div class="inner-tax-total" onclick="taxToggle('esubtotal-item-tax-details<?php echo $_item->getId(); ?>', this, 'inner-tax-total-expanded');">
+        <?php else: ?>
+            <div class="inner-price">
+        <?php endif; ?>
+
+            <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(0, 1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
+                <?php echo $this->helper('checkout')->formatPrice($_item->getRowTotal()+$_item->getWeeeTaxAppliedRowAmount()+$_item->getWeeeTaxRowDisposition()); ?>
+            <?php else: ?>
+                <?php echo $this->helper('checkout')->formatPrice($_item->getRowTotal()) ?>
+            <?php endif; ?>
+
+        </div>
+        <?php if (Mage::helper('weee')->getApplied($_item)): ?>
+
+            <div class="inner-tax-info" id="esubtotal-item-tax-details<?php echo $_item->getId(); ?>" style="display: none;">
+                <?php if (Mage::helper('weee')->typeOfDisplay($_item, 1, 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
+                    <small>
+                    <?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+                        <span class="nobr"><?php echo $tax['title']; ?>: <?php echo Mage::helper('checkout')->formatPrice($tax['row_amount'],true,true); ?></span><br />
+                    <?php endforeach; ?>
+                    </small>
+                <?php elseif (Mage::helper('weee')->typeOfDisplay($_item, 2, 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
+                    <?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+                        <span class="nobr"><small><?php echo $tax['title']; ?>: <?php echo Mage::helper('checkout')->formatPrice($tax['row_amount_incl_tax'],true,true); ?></small></span><br />
+                    <?php endforeach; ?>
+                <?php elseif (Mage::helper('weee')->typeOfDisplay($_item, 4, 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
+                    <small>
+                    <?php foreach (Mage::helper('weee')->getApplied($_item) as $tax): ?>
+                        <span class="nobr"><?php echo $tax['title']; ?>: <?php echo Mage::helper('checkout')->formatPrice($tax['row_amount_incl_tax'],true,true); ?></span><br />
+                    <?php endforeach; ?>
+                    </small>
+                <?php endif; ?>
+            </div>
+
+            <?php if (Mage::helper('weee')->typeOfDisplay($_item, 2, 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
+                <div class="inner-tax-total" onclick="taxToggle('esubtotal-item-tax-details<?php echo $_item->getId(); ?>', this, 'inner-tax-total-expanded');">
+                    <span class="nobr"><?php echo Mage::helper('weee')->__('Total'); ?>:<br /> <?php echo $this->helper('checkout')->formatPrice($_item->getRowTotal()+$_item->getWeeeTaxAppliedRowAmount()+$_item->getWeeeTaxRowDisposition()); ?></span>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+    </td>
+    <?php endif; ?>
+    <td style="text-align:center; padding-right:0px">
+		<a href="<?php echo $this->getDeleteUrl() ?>" title="<?php echo $this->__('Remove item')?>"><img src="<?php echo $this->getSkinUrl('images/i-cart-remove.gif') ?>" alt="<?php echo $this->__('Remove item')?>" /></a>
+	</td>
+</tr>
+
+

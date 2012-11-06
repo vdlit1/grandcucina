@@ -1,0 +1,72 @@
+<?php  $collection = $this->getCollection(); ?>
+<?php if (count($collection) > 0) : ?>
+ <?php $category = $this->getData('setCategoryId'); ?>
+<div class="slide-hompage">
+	<div id="slideshow">
+                <ul class="slides-nav">
+                     <?php $j =0;  ?>
+                    <?php foreach ($collection as $_item) : $j++; ?>
+                    <?php  $filter = explode(',',$_item->getCategories()); ?>
+                    <?php if(in_array($category, $filter)):?>
+                        <li class="<?php if($j==1):?>on<?php endif; ?>"><a href="#tab-<?php echo $j;?>" class="<?php if($j==1):?>activeSlide<?php endif; ?>"><?php echo $_item->getTablabel(); ?><span><?php echo $_item->getContent()  ?></span></a><span class="arrow">arrow</span></li>
+                        <?php endif;?>
+                       <?php endforeach; ?>
+                </ul>
+		<div class="slides">
+			<ul style="position: relative; width: 762px; height: 395px;">
+                             <?php $i =0;  ?>
+                             <?php foreach ($collection as $_item) : $i++ ?>
+                             <?php  $filter = explode(',',$_item->getCategories()); ?>
+                             <?php if(in_array($category, $filter)):?>
+				<li id="tab-<?php echo $i;?>" >
+                                     <div class="jTagOverlay">
+                                           <?php echo $this->getOverlayHtml($_item['tagimage_id']); ?>
+                                     </div>
+                                    <img  width="762" height="392" alt="" src="<?php echo $this->helper('tagimage/image')->init($_item->getFile())->keepFrame(true)->resize(Mage::getSingleton('tagimage/config')->getWidht(),Mage::getSingleton('tagimage/config')->getHeight()); ?>" />
+                                   <?php echo $_item->getImagecontent(); ?>
+				</li>
+                                <?php endif; ?>
+                                <?php endforeach; ?>
+			</ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    function showTag(id){
+        var box_height = $('table_'+id).getHeight();
+        var box_width = $('table_'+id).getWidth();
+        var slide_height = 392;
+        var slide_width   = 762;
+        var top = $(id).getStyle('top').replace('px', '');
+		//alert (top);
+        var left =  $(id).getStyle('left').replace('px', '');
+        if(parseInt(slide_height)<(parseInt(box_height)+parseInt(top))){
+            var _top_ = (parseInt(top)-parseInt(box_height))-20;
+            if(_top_<0){
+                _top_ = 0;
+            }
+            $(id).setStyle({'top':_top_+'px'});
+        }
+        if(parseInt(slide_width)< (parseInt(box_width)+parseInt(left))){
+            var _left_ = (parseInt(left)-parseInt(box_width))-9;
+                $(id).setStyle({'left':_left_+'px'});
+        }
+
+        $('table_'+id).show();
+        $$('table.table_'+id).each(function(e){
+            e.show();
+        });
+        $(id).setOpacity(0.9999);
+
+    };
+    function hideTag(id){
+        $('table_'+id).hide();
+        $$('table.table_'+id).each(function(e){
+            e.hide();
+        });
+        $(id).setOpacity(0.001);
+
+    };
+</script>
+
+<?php endif; ?>

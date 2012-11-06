@@ -1,0 +1,194 @@
+<?php
+$_coreHelper = $this->helper('core');
+$checkoutHelper = Mage::helper('onestepcheckout/checkout');
+?>
+<h3><?php echo $this->__('Product'); ?><span><?php echo $this->__('Subtotal'); ?></span></h3>
+<?php foreach($this->getItems() as $item): ?>
+<div class="review-order-01">
+	<?php $_product = Mage::getModel('catalog/product')->load($item->getProductId());
+		$imageUrl = Mage::helper('catalog/image')->init($_product, 'small_image')->resize(61,52);	
+	?>
+
+	<img alt="<?php echo $item->getName(); ?>" src="<?php echo $imageUrl;?>" />
+	<p>
+	<strong><?php echo $_product->getAttributeText('grandcucina_brands') ?></strong>
+	<?php echo $item->getName().' x'.$item->getQty(); ?>
+	</p>
+	<?php if($checkoutHelper->settings['show_custom_options']): ?>
+		<?php $options = $item->getProduct()->getTypeInstance(true)->getOrderOptions($item->getProduct()); ?>
+		<?php if(isset($options['options']) && count($options['options']) > 0): ?>
+		<ul class="onestepcheckout-custom-options">
+		<?php foreach($options['options'] as $option): ?>
+			<li><b><?php echo $option['label'] . ':</b> ' . $option['value']; ?></li>
+		<?php endforeach; ?>
+		</ul>
+		<?php endif; ?>
+		<?php if($item->getProduct()->isConfigurable()): ?>
+		<?php
+		$configurable_options = $item->getProduct()->getTypeInstance(true)->getSelectedAttributesInfo($item->getProduct());
+		?>
+		<?php if(is_array($configurable_options) && count($configurable_options) > 0): ?>
+		<ul class="onestepcheckout-custom-options">
+		<?php foreach($configurable_options as $option): ?>
+			<li><b><?php echo $option['label']; ?>:</b> <?php echo $option['value']; ?></li>
+		<?php endforeach; ?>
+		</ul>
+		<?php endif; ?>
+		<?php endif; ?>
+	<?php endif; ?>
+	<h4><?php if($checkoutHelper->settings['display_tax_included']): ?>
+            <?php echo $this->helper('checkout')->formatPrice($this->helper('checkout')->getSubtotalInclTax($item)); ?>
+            <?php else: ?>
+            <?php echo $this->helper('checkout')->formatPrice($item->getRowTotal()); ?>
+            <?php endif; ?></h4>
+</div>
+<?php endforeach; ?>
+<ul class="ship-list">
+	<?php $li='';foreach($this->getTotals() as $total): ?>
+	<?php if(!$total->getTitle()){continue;}?>
+	<?php
+			$fullInfo = $total->getFullInfo();
+
+			if(!empty($fullInfo) && $checkoutHelper->settings['display_full_tax']):
+				foreach ($fullInfo as $info):
+					$rates = current($info['rates']);
+					$amount = $info['amount'];
+	?>
+				
+			<li><?php echo $rates['title'] ?> (<?php echo $rates['percent'] ?>%)<span><?php echo $this->helper('checkout')->formatPrice($amount); ?></span></li>
+			<?php endforeach;endif;?>
+			<?php $code = $total->getCode();
+            $value = $total->getValue();
+
+            if($code == 'subtotal')    {
+                $total_name = $this->__('ORDER TOTAL');
+            }
+            elseif($code == 'shipping')    {
+                $total_name = $this->__('Shipping &amp; Handling');
+                if($checkoutHelper->settings['display_tax_included'])   {
+                    $value += $this->getQuote()->getShippingAddress()->getShippingTaxAmount();
+                }
+                            }
+            elseif($code == 'grand_total')    {
+                $total_name = $this->__('amount payable');
+            }
+            else    {
+                $total_name = $total->getTitle();
+            }
+            ?>
+			<li <?php if($total->getCode() == 'grand_total'): ?> class="grand-total"<?php endif; ?> <?php if($total->getCode() == 'subtotal'): ?> class="sub-total"<?php endif; ?>><?php echo $total_name;?><?php echo $this->helper('checkout')->formatPrice($value); ?></li>
+			
+	<?php endforeach; ?>
+</ul>
+<table class="onestepcheckout-summary" style="display:none">
+    <thead>
+        <tr>
+            <th class="name"><?php echo $this->__('Product'); ?></th>
+            <th class="qty"><?php echo $this->__('Qty'); ?></th>
+            <th class="total"><?php echo $this->__('Subtotal'); ?></th>
+        </tr>
+    </thead>
+    <?php foreach($this->getItems() as $item): ?>
+    <tr>
+        <td class="name">
+            <?php echo $item->getName(); ?>
+            <?php if($checkoutHelper->settings['show_custom_options']): ?>
+                <?php $options = $item->getProduct()->getTypeInstance(true)->getOrderOptions($item->getProduct()); ?>
+                <?php if(isset($options['options']) && count($options['options']) > 0): ?>
+                <ul class="onestepcheckout-custom-options">
+                <?php foreach($options['options'] as $option): ?>
+                    <li><b><?php echo $option['label'] . ':</b> ' . $option['value']; ?></li>
+                <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+
+                <?php if($item->getProduct()->isConfigurable()): ?>
+
+                <?php
+                $configurable_options = $item->getProduct()->getTypeInstance(true)->getSelectedAttributesInfo($item->getProduct());
+                ?>
+
+                <?php if(is_array($configurable_options) && count($configurable_options) > 0): ?>
+                <ul class="onestepcheckout-custom-options">
+                <?php foreach($configurable_options as $option): ?>
+                    <li><b><?php echo $option['label']; ?>:</b> <?php echo $option['value']; ?></li>
+                <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+
+                <?php endif; ?>
+
+            <?php endif; ?>
+        </td>
+        <td class="qty"><?php echo $item->getQty(); ?></td>
+        <td class="total">
+            <?php if($checkoutHelper->settings['display_tax_included']): ?>
+            <?php echo $this->helper('checkout')->formatPrice($this->helper('checkout')->getSubtotalInclTax($item)); ?>
+            <?php else: ?>
+            <?php echo $this->helper('checkout')->formatPrice($item->getRowTotal()); ?>
+            <?php endif; ?>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+
+<table class="onestepcheckout-totals" style="display:none">
+    <?php foreach($this->getTotals() as $total): ?>
+    <?php if(!$total->getTitle()){continue;}?>
+        <?php
+        $fullInfo = $total->getFullInfo();
+
+        if(!empty($fullInfo) && $checkoutHelper->settings['display_full_tax']):
+            foreach ($fullInfo as $info):
+                $rates = current($info['rates']);
+                $amount = $info['amount'];
+        ?>
+            <tr>
+                <td class="title"><?php echo $rates['title'] ?> (<?php echo $rates['percent'] ?>%)</td><td class="value"><?php echo $this->helper('checkout')->formatPrice($amount); ?></td>
+            </tr>
+        <?php endforeach;
+        endif;?>
+    <tr<?php if($total->getCode() == 'grand_total'): ?> class="grand-total"<?php endif; ?>>
+        <td class="title">
+            <?php
+
+            $code = $total->getCode();
+            $value = $total->getValue();
+
+            if($code == 'subtotal')    {
+                $total_name = $this->__('Subtotal');
+            }
+            elseif($code == 'shipping')    {
+                $total_name = $this->__('Shipping');
+                if($checkoutHelper->settings['display_tax_included'])   {
+                    $value += $this->getQuote()->getShippingAddress()->getShippingTaxAmount();
+                }
+                            }
+            elseif($code == 'grand_total')    {
+                $total_name = $this->__('Grand total');
+            }
+            else    {
+                $total_name = $total->getTitle();
+            }
+
+            echo $total_name;
+
+            ?>
+        </td>
+        <td class="value">
+            <?php echo $this->helper('checkout')->formatPrice($value); ?>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>			
+<script type="text/javascript">
+//<![CDATA[
+var total = <?php echo $this->getGrandTotal();?>;
+    if(payment.reloadcallback){
+        var url = '<?php echo $this->getUrl('onestepcheckout/ajax/paymentrefresh', array('_secure'=>true)); ?>';
+        paymentrefresh(url);
+        payment.countreload = 0;
+        payment.reloadcallback = false;
+    }
+//]]>
+</script>

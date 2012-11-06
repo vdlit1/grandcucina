@@ -1,0 +1,118 @@
+<?php  $collection = $this->getCollection(); ?>
+<?php if (count($collection) == 0) : ?>
+<div class="notification-global" style="text-align: center"><h2><?php echo $this->__('There are no images matching the selection.') ?></h2></div>
+<?php endif; ?>
+
+<?php if (count($collection) > 0) : ?>
+<div class="content-header">
+    <h3 class="icon-head head-cms-block"><?php echo $this->__('Manager images tags'); ?></h3>    <p class="form-buttons"></p>
+</div>
+
+<div style="float:left; width:100%">
+    <div id="page:left" class="side-col" style="width:19%">
+           <h3><?php echo $this->__('INFORMATION'); ?></h3>
+        <ul class="tabs" id="page_tabs">
+            <li>
+                <a  class="tab-item-link active"  name="main_section" id="page_tabs_main_section" href="#">
+                    <span style="background: url('<?php echo $this->getSkinUrl('tagimages/images/narrow-right.png')?>') right no-repeat"><span title="<?php echo $this->__('Manage tag images'); ?>" class="changed"></span><span title="<?php echo $this->__('Manage tag images'); ?>" class="error"></span><?php echo $this->__('Please choose an image to tag'); ?></span>
+                </a>
+
+            </li>
+
+        </ul>
+
+        <div style="padding-top:90px; padding-left:30px; display:none" id="processing">
+            <img src="<?php echo $this->getSkinUrl('tagimages/images/ajax-loader_1.gif') ?>" />
+            <span><?php echo $this->__('Processing..') ?></span>
+        </div>
+  </div>
+
+
+<div class="entry-edit"  style="float:right ; width: 80%">
+    <div class="entry-edit-head"><h4 class="icon-head head-customer-sales-statistics"><?php echo $this->__('Inset Title and link of product on the image') ?></h4></div>
+    <div class="grid">
+        <table cellspacing="0" class="data">
+            <thead>
+                <tr class="headings">
+                    <th width="815px"  style="text-align: center"><?php echo $this->__('Slide'); ?></th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr style="background-color:#FAFAFA" >
+
+                    <td style="background-color:#FAFAFA">
+                        <div class="pagination-container" style="margin: auto; padding-top: 2px;">
+                            <div class="pagination-left" id="image-categories">
+                                <div class="pagination-bottom">
+                                            <div  class="slider">
+                                                <?php foreach ($collection as $_item) : ?>
+                                                       <dl>
+                                                            <dt>
+                                                                <div class="jTagOverlay">
+                                                                   <?php echo $this->getOverlayHtml($_item['tagimage_id']); ?>
+                                                                </div>
+                                                                <a href="<?php echo $this->getUrl('tagimage/adminhtml_tags/tags').'id/'.$_item->getId(); ?>"><img src="<?php echo $this->helper('tagimage/image')->init($_item->getFile())->keepFrame(true)->resize(Mage::getSingleton('tagimage/config')->getWidht(),Mage::getSingleton('tagimage/config')->getHeight()); ?>" /></a>
+                                                            </dt>
+                                                            <dd><span><?php echo $_item['label']; ?></span></dd>
+                                                       </dl>
+                                                <?php endforeach ?>
+                                            </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+             <tbody>
+                <tr class="no-display"><td colspan="2"></td></tr>
+                <input type="hidden" value="<?php echo $this->getFormKey();?>" id="form_key" />
+            </tbody>
+          </table>
+    </div>
+</div>
+
+
+
+
+</div>
+ <?php endif ?>
+<script type="text/javascript">
+
+		document.observe('dom:loaded', function () {
+			$$('div.slider').each(function (e) {
+				new SliderJS(e);
+			});
+		});
+</script>
+
+
+<script type="text/javascript">
+     function deleteTags(id, lang){
+         var url ='<?php echo $this->getUrl('tagimage/adminhtml_tags/delete');  ?>';
+         var key = $('form_key').value;
+        jQuery.ajax({
+               url:url,
+               type:"POST",
+               data:({
+                       form_key:key,
+                       tags_id  :id
+                       }),
+               async:false,
+               beforeSend:function(){
+                   jQuery('#processing').show();
+               },
+               success:function(response){
+                  jQuery('#processing').hide('slow');
+                  var divId =  '#'+lang;
+                  jQuery(divId).hide('slow');
+          }})
+     }
+
+
+     function editTags(tag_id,image_id){
+        var tag_id = tag_id.replace('del_','');
+         var url ='<?php echo $this->getUrl('tagimage/adminhtml_tags/edit') ?>'+'tag/'+tag_id+'/id/'+image_id;
+         setLocation(url);
+     }
+</script>
+

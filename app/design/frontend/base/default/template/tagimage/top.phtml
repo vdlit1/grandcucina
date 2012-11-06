@@ -1,0 +1,107 @@
+<script type="text/javascript" src="<?php echo $this->getJsUrl('tagimages');?>/slider.js"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/highslide-full.js') ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css') ?>/jquery.tag.css" media="all" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css') ?>/slider.css" media="all" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css') ?>/highslide.css" media="all" />
+<?php  $collection = $this->getCollection(); ?>
+<?php if (count($collection) == 0) : ?>
+<div class="note-msg" style="text-align: center"><h2><?php echo $this->__('There are no images matching the selection.') ?></h2></div>
+<?php endif; ?>
+<?php if (count($collection) > 0) : ?>
+	<div class="pagination-container">
+            <div class="pagination-left" id="image-categories">
+                <div class="pagination-bottom">
+                    <div  class="slider">
+                        <?php foreach ($collection as $_item) : ?>
+                        <?php  $category = $this->getCurrentCategory(); ?>
+                        <?php $C = explode(',',$_item->getCategories()); ?>
+                            <?php //if(in_array($category, $C)):?>
+                               <dl>
+                                    <dt>
+                                        <div class="jTagOverlay">
+                                           <?php echo $this->getOverlayHtml($_item['tagimage_id']); ?>
+                                        </div>
+                                       <img src="<?php echo $this->helper('tagimage/image')->init($_item->getFile())->keepFrame(true)->resize(Mage::getSingleton('tagimage/config')->getWidht(),Mage::getSingleton('tagimage/config')->getHeight()); ?>" />
+                                    </dt>
+                                    <dd><span><?php echo $_item['label']; ?></span></dd>
+                               </dl>
+                              <?php //endif; ?>
+                         <?php endforeach ?>
+                     </div>
+                </div>
+            </div>
+    </div>
+
+<?php endif; ?>
+
+
+<script type="text/javascript">
+
+		document.observe('dom:loaded', function () {
+			$$('div.slider').each(function (e) {
+				new SliderJS(e);
+			});
+		});
+</script>
+
+<script type="text/javascript">
+             function showTag(id){
+                 var box_height = $('table_'+id).getHeight();
+                 var box_width = $('table_'+id).getWidth();
+                 var slide_height = <?php echo $this->helper('tagimage')->settings('setheight'); ?>;
+                 var slide_width   = <?php echo $this->helper('tagimage')->settings('setwidth'); ?>;
+                 var top = $(id).getStyle('top').replace('px', '');
+                 var left =  $(id).getStyle('left').replace('px', '');
+                 if(parseInt(slide_height)<(parseInt(box_height)+parseInt(top))){
+                     var _top_ = (parseInt(top)-parseInt(box_height));
+                     if(_top_<0){
+                         _top_ = 0;
+                     }
+                     $(id).setStyle({'top':_top_+'px'});
+                 }
+                 if(parseInt(slide_width)< (parseInt(box_width)+parseInt(left))){
+                        var _left_ = (parseInt(left)-parseInt(box_width))-20;
+                         $(id).setStyle({'left':_left_+'px'});
+                 }
+
+                 $('table_'+id).show();
+                 $$('table.table_'+id).each(function(e){
+                     e.show();
+                 });
+                 $(id).setOpacity(0.9999);
+
+             };
+             function hideTag(id){
+                  $('table_'+id).hide();
+                  $$('table.table_'+id).each(function(e){
+                     e.hide();
+                 });
+                 $(id).setOpacity(0.001);
+
+             };
+</script>
+
+<script type="text/javascript">
+	hs.graphicsDir = '<?php echo $this->getSkinUrl('js/graphics/') ?>';
+	hs.align = 'center';
+	hs.transitions = ['expand', 'crossfade'];
+	hs.wrapperClassName = 'dark borderless floating-caption';
+	hs.fadeInOut = true;
+	hs.dimmingOpacity = .75;
+	hs.cacheAjax = false;
+
+
+	// Add the controlbar
+	if (hs.addSlideshow) hs.addSlideshow({
+		//slideshowGroup: 'group1',
+		interval: 5000,
+		repeat: false,
+		useControls: true,
+		fixedControls: 'fit',
+		overlayOptions: {
+			opacity: .6,
+			position: 'bottom center',
+			hideOnMouseOut: true
+		}
+	});
+</script>

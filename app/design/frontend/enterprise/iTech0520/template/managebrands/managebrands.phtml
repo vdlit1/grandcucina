@@ -1,0 +1,118 @@
+<?php 
+	$brand = $this->getBrand();
+	$catIds = $this->getCategoriesBrand();
+	$_collectionSize = count($catIds);
+	$_columnCount = 3;
+?>
+
+<div class="page-title">
+    <h1><?php echo $brand->getTitle() ?></h1>
+</div>
+<div class="list-sub-category">
+    <?php  $collectionSlider = Mage::getBlockSingleton('tagimage/tagimage')->getCollection(); ?>
+    <?php $modelBrand = Mage::getModel('catalog/category');?>
+     <?php if (count($collectionSlider) > 0) : ?>
+            <?php $brandname =  $brand->getTitle(); ?>
+            <div id="myshow1" class="slider-container">
+                <ul class="category-slider show">
+                    <?php $i =0;  ?>
+                    <?php foreach ($collectionSlider as $_item) : $i++ ?>
+                    <?php $array_bands = explode(',',$_item->getCategories()); ?>
+                    <?php $array_category = array(); ?>
+                    <?php foreach($array_bands as $_brand):?>
+                            <?php $array_category[] = $modelBrand->load($_brand)->getName() ?>
+                    <?php endforeach; ?>
+                    <?php if(in_array($brandname, $array_category)):?>
+                        <li class="slide" data-slide-interval="">
+                            <div class="jTagOverlay">
+                                <?php echo Mage::getBlockSingleton('tagimage/tagimage')->getOverlayHtml($_item['tagimage_id']); ?>
+                            </div>
+                            <img  width="719" height="391" alt="" src="<?php echo $this->helper('tagimage/image')->init($_item->getFile())->keepFrame(true)->resize(719,391); ?>" />
+                            <div class="data-container">
+                                <div class="slider-content">
+                                    <?php echo $_item->getImagecontent(); ?>
+                                </div>
+                            </div>
+                        </li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ul>
+                <ol class="proto-controls"><li class="proto-control start-stop"><a title="Pause the show" href="javascript:void(0)"></a></li><li class="proto-control backward"><a title="Go to Previous slide and play backwards" href="javascript:void(0)"></a></li><li class="proto-control forward"><a title="Go to Next slide and play forwards" href="javascript:void(0)"></a></li></ol>
+            </div>
+            
+            <script>
+            var myshow;
+            Event.observe(window, "load", function() {
+
+            $('myshow1') && $('myshow1').protoShow({
+                    interval	:	4000,
+                    captions	: 	false
+            });
+
+            $$('.proto-navigation li a').each(function(element){
+                    $$('.protoshow ul.show li.slide').each(function(e){
+                        var lang = 'tab_'+(e.readAttribute('lang'));
+                        if(element.id ==lang){
+                        $(element).update(e.readAttribute('title'));
+                        }
+                    })
+                });
+            });
+            </script>
+            <script type="text/javascript">
+                function showTag(id){
+                    var box_height = $('table_'+id).getHeight();
+                    var box_width = $('table_'+id).getWidth();
+                    var slide_height = 440;
+                    var slide_width   = 810;
+                    var top = $(id).getStyle('top').replace('px', '');
+                    var left =  $(id).getStyle('left').replace('px', '');
+                    if(parseInt(slide_height)<(parseInt(box_height)+parseInt(top))){
+                        var _top_ = (parseInt(top)-parseInt(box_height));
+                        if(_top_<0){
+                            _top_ = 0;
+                        }
+                        $(id).setStyle({'top':_top_+'px'});
+                    }
+                    if(parseInt(slide_width)< (parseInt(box_width)+parseInt(left))){
+                        var _left_ = (parseInt(left)-parseInt(box_width))-20;
+                            $(id).setStyle({'left':_left_+'px'});
+                    }
+
+                    $('table_'+id).show();
+                    $$('table.table_'+id).each(function(e){
+                        e.show();
+                    });
+                    $(id).setOpacity(0.9999);
+
+                };
+                function hideTag(id){
+                    $('table_'+id).hide();
+                    $$('table.table_'+id).each(function(e){
+                        e.hide();
+                    });
+                    $(id).setOpacity(0.001);
+
+                };
+            </script>
+        <?php endif ?>  
+	<?php if($_collectionSize>0): ?> 
+		<?php $i=0; foreach($catIds as $id): ?>
+		<?php $_sub = Mage::getModel('catalog/category')->load($id) ?>
+			<?php if ($i++%$_columnCount==0): ?>
+			<div class="category-line">
+			<?php endif ?>
+				<div class="category-info<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+					<?php if ($image = $_sub->getThumbnail()): ?>
+						<img src="<?php echo Mage::getBaseUrl('media').'catalog/category/'.$image; ?>" alt="<?php echo $_sub->getName() ?>"/>
+					<?php endif ?>
+					<div class="category-name-container">
+						<a href="<?php echo $this->getCategoryUrl($_sub) ?>"><?php echo $_sub->getName() ?></a>
+					</div>
+				</div>
+			<?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+			</div>
+			<?php endif ?>
+		<?php endforeach ?>
+	<?php endif ?>
+</div><br/>

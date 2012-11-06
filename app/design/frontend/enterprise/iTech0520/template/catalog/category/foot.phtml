@@ -1,0 +1,60 @@
+<?php
+    $_helper    = $this->helper('catalog/output');
+    $_category  = $this->getCurrentCategory();
+?>
+
+<div class="category-description">
+	<?php if($_description=$_category->getDescription()): ?>
+		<?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
+	<?php endif; ?>
+</div>
+<?php 
+	$childrenIdArray = explode(',',$_category->getChildren());
+	$childrenIdArray[] = $_category->getId();
+	
+	$collection = Mage::getModel('catalog/category')->getCollection()
+		->addAttributeToFilter('entity_id', array('in' => $childrenIdArray))
+		->addAttributeToSelect('*');
+	$arrOption = array();
+	foreach ($collection as $category){
+		$_category = Mage::getModel('catalog/category')->load($category->getId());
+		$products = $_category->getProductCollection()
+			->addAttributeToSelect('*')
+			->addAttributeToFilter('used_by', array('neq' => ''))
+			;
+	
+		Mage::getSingleton('catalog/product_status')->addVisibleFilterToCollection($products);
+		Mage::getSingleton('catalog/product_visibility')->addVisibleInCatalogFilterToCollection($products);
+		$products->load();
+		
+		foreach($products as $_product){
+			foreach(explode(",",$_product->getUsedBy()) as $option){
+				$arrOption[] = $option;
+			}
+		}
+	}
+	$arrOption = array_unique($arrOption);
+	
+	$usedByCollection = Mage::helper('attributemanager/data')->getUsedByCollection($arrOption, 4);
+	
+	
+	
+?>
+<?php if(count($usedByCollection)>0): ?>
+<div class="category-used-by">
+	<div class="used-by-title">
+		<h6><?php echo $this->__('Product used by:') ?></h6>
+		<a href="<?php echo $this->getBaseUrl().'usedby' ?>" class="more-view"><?php echo $this->__('View all') ?></a>
+	</div>
+	<ul>
+	<?php $i=0; foreach($usedByCollection as $usedBy): $i++?>
+		<li <?php if($i==1):?>class="first"<?php endif ?>>
+			<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'used_by/'.$usedBy->getFilename(); ?>" alt="" width="110px"/>
+			<a class="used-by-label" href="#">
+				<?php echo Mage::helper('attributemanager/data')->getAttributeOptionValue('used_by', $usedBy->getOptionId()) ?>
+			</a>
+		</li>
+	<?php endforeach ?>
+	</ul>
+</div>
+<?php endif ?>

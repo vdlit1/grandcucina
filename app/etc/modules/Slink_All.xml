@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Slink for Magento 
+ *
+ * @category    
+ * @package     Slink
+ * @author      Bernard Tai 
+ * @copyright   Copyright (c) 2009 Bernard Tai www.saaslink.net
+ * @license     GNU/GPL
+ */
+-->
+<config>
+    <modules>
+        <Slink_MageSaasu>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Slink_MageSaasu>	
+    </modules>
+</config>

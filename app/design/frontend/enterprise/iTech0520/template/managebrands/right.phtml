@@ -1,0 +1,10 @@
+<?php $brand = $this->getBrand($this->getRequest()->getParam('id')); ?>
+<div class="brand-info">
+	<img alt="<?php echo $brand->getTitle() ?>" src="<?php echo $this->getBrandLogoUrl($brand->getFilename()) ?>">
+	<div class="brands-description">
+		<?php echo $brand->getDescription() ?>
+	</div>
+</div>
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId($brand->getStatic1())->toHtml() ?>
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId($brand->getStatic2())->toHtml() ?>
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId($brand->getStatic3())->toHtml() ?>

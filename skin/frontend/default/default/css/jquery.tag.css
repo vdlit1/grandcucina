@@ -1,0 +1,430 @@
+.jTagArea {
+}
+.jTagOverlay {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+.jTagDrag {
+    border: 4px solid greenYellow;
+    cursor: move;
+    height: 155px;
+    width: 155px;
+}
+.jTagInput {
+}
+.jTagSave {
+    background: none repeat scroll 0 0 greenYellow;
+    width: 100%;
+}
+.jTagInput input {
+    border: 1px solid black;
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 60%;
+}
+.jTagload {
+    background: url("images/load.png") no-repeat scroll center center transparent;
+    cursor: pointer;
+    float: right;
+    height: 20px;
+    width: 20px;
+}
+.jTagSaveClose {
+    background: url("images/cancel.png") no-repeat scroll center center transparent;
+    cursor: pointer;
+    float: right;
+    height: 20px;
+    width: 20px;
+}
+.jTagEditTag {
+    background: url("images/gtk-edit.png") no-repeat scroll 0 0 transparent;
+    bottom: 0;
+    cursor: pointer;
+    display: none;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    width: 40px;
+    z-index: 5;
+}
+.jTagDeleteTag {
+    background: url("images/cancel.png") no-repeat scroll 0 0 transparent;
+    bottom: 0;
+    cursor: pointer;
+    display: none;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    width: 20px;
+    z-index: 5;
+}
+.jTagSaveBtn {
+    background: url("images/save.png") no-repeat scroll center center transparent;
+    cursor: pointer;
+    float: right;
+    height: 20px;
+    width: 20px;
+}
+.jTagPngOverlay {
+    background: url("images/trans.png") repeat scroll 0 0 transparent;
+    cursor: not-allowed;
+}
+.jTagTag {
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+}
+.jTagTag .container {
+    background-color: #FFFFFF;
+    color: #000000;
+    cursor: pointer;
+    height: auto;
+    line-height: 20px;
+    opacity: 0.8;
+    position: absolute;
+    text-align: center;
+    width: auto;
+}
+.jTagTag .references-top-left, .jTagTag .references-view-left, .jTagTag .references-bottom-left {
+    width: 5px;
+}
+.jTagTag .references-bottom-left, .jTagTag .references-bottom-right, .jTagTag .references-top-left, .jTagTag .references-top-left, .jTagTag .references-top-right {
+    height: 6px;
+    width: 5px;
+}
+.jTagTag .references-top-midel {
+    height: 6px;
+}
+.jTagTag .references-top-right {
+}
+.jTagTag .references-bottom-left {
+}
+.jTagTag .references-bottom-right {
+}
+.jTagTag .references-bottom-midel {
+    height: 6px;
+}
+.jTagTag .references-view-left, .jTagTag .references-view-right {
+    width: 5px;
+}
+.jTagTag .references-view-right {
+    width: 5px;
+}
+.jTagTag .references-view-midel {
+    background: url("../images/references-content.png") repeat scroll 0 0 transparent;
+    display: block;
+    margin: 0;
+    padding: 15px 10px;
+    width: 100%;
+}
+.jTagTag .circle {
+    height: 27px;
+    left: -15px;
+    position: absolute;
+    top: -15px;
+    width: 27px;
+}
+.jTagTag {
+    background: none repeat scroll 0 0 transparent !important;
+    border: medium none !important;
+    height: 81px !important;
+    width: 80px !important;
+}
+.jTagTag .references-container {
+    border: 0 none !important;
+    margin: 0 auto;
+}
+.jTagTag .circle-content {
+    position: relative;
+}
+.jTagLabels {
+    padding: 5px;
+}
+.jTagLabels label {
+    cursor: pointer;
+    float: left;
+    font-weight: bold;
+    padding: 5px;
+}
+.overlay_magento {
+    background-color: #000000;
+    display: block;
+    height: 1255px;
+    left: 0;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1001;
+}
+.overlay_dialog {
+    background-color: #666666;
+    opacity: 0.6;
+}
+.overlay___invisible__ {
+    background-color: #666666;
+    opacity: 0;
+}
+.dialog_nw {
+    background: url("default/top_left.gif") no-repeat scroll 0 0 transparent;
+    height: 23px;
+    width: 9px;
+}
+.dialog_n {
+    background: url("default/top_mid.gif") repeat-x scroll 0 0 transparent;
+    height: 23px;
+}
+.dialog_ne {
+    background: url("default/top_right.gif") no-repeat scroll 0 0 transparent;
+    height: 23px;
+    width: 9px;
+}
+.dialog_e {
+    background: url("default/center_right.gif") repeat-y scroll 0 0 transparent;
+    width: 2px;
+}
+.dialog_w {
+    background: url("default/center_left.gif") repeat-y scroll 0 0 transparent;
+    width: 2px;
+}
+.dialog_sw {
+    background: url("default/bottom_left.gif") no-repeat scroll 0 0 transparent;
+    height: 19px;
+    width: 9px;
+}
+.dialog_s {
+    background: url("default/bottom_mid.gif") repeat-x scroll 0 0 transparent;
+    height: 19px;
+}
+.dialog_se {
+    background: url("default/bottom_right.gif") no-repeat scroll 0 0 transparent;
+    height: 19px;
+    width: 9px;
+}
+.dialog_sizer {
+    background: url("default/sizer.gif") no-repeat scroll 0 0 transparent;
+    cursor: se-resize;
+    height: 19px;
+    width: 9px;
+}
+.dialog_close {
+    background: url("default/close.gif") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 14px;
+    left: 8px;
+    position: absolute;
+    top: 5px;
+    width: 14px;
+    z-index: 2000;
+}
+.dialog_minimize {
+    background: url("default/minimize.gif") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 15px;
+    left: 28px;
+    position: absolute;
+    top: 5px;
+    width: 14px;
+    z-index: 2000;
+}
+.dialog_maximize {
+    background: url("default/maximize.gif") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 15px;
+    left: 49px;
+    position: absolute;
+    top: 5px;
+    width: 14px;
+    z-index: 2000;
+}
+.dialog_title {
+    color: #000000;
+    float: left;
+    font-family: Tahoma,Arial,sans-serif;
+    font-size: 12px;
+    height: 14px;
+    text-align: center;
+    width: 100%;
+}
+.dialog_content {
+    background-color: #112233;
+    color: #DDDDDD;
+    font-family: Tahoma,Arial,sans-serif;
+    font-size: 10px;
+    overflow: auto;
+}
+.top_draggable, .bottom_draggable {
+    cursor: move;
+}
+.status_bar {
+    font-size: 12px;
+}
+.status_bar input {
+    font-size: 12px;
+}
+.wired_frame {
+    border: 1px dashed #000000;
+    display: block;
+    position: absolute;
+}
+.dialog {
+    display: block;
+    position: absolute;
+}
+.dialog table.table_window {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.dialog table.table_window td, .dialog table.table_window th {
+    padding: 0;
+}
+.dialog .title_window {
+    -moz-user-select: none;
+}
+.dialog {
+    border: 1px solid #555555;
+}
+.dialog .bot {
+    display: none !important;
+}
+.overlay_magento {
+    background-color: #000000;
+    opacity: 0.6;
+}
+.top.table_window {
+    background: url("magento/top_bg.gif") repeat-x scroll 0 100% #6A838B;
+    border-bottom: 1px solid #E6E6E6;
+}
+.magento_nw {
+    height: 28px;
+    width: 6px;
+}
+.magento_n {
+    height: 28px;
+}
+.magento_ne {
+    height: 28px;
+    width: 6px;
+}
+.magento_w {
+    width: 6px;
+}
+.magento_e {
+    width: 6px;
+}
+.magento_w, .magento_e, .magento_content {
+    background: url("magento/content_bg.gif") repeat-x scroll 0 0 #FAFAFA;
+}
+.magento_sw {
+    background: none repeat scroll 0 0 #DEEBF0;
+    height: 3px;
+    width: 5px;
+}
+.magento_s {
+    background: none repeat scroll 0 0 #DEEBF0;
+    height: 3px;
+}
+.magento_se, .magento_sizer {
+    background: none repeat scroll 0 0 #DEEBF0;
+    height: 3px;
+    width: 5px;
+}
+.magento_sizer {
+    cursor: se-resize;
+}
+.magento_close {
+    background: url("magento/window_close.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 16px;
+    position: absolute;
+    right: 7px;
+    top: 5px;
+    width: 16px;
+    z-index: 1000;
+}
+.magento_minimize {
+    background: url("magento/window_minimize.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 16px;
+    position: absolute;
+    right: 28px;
+    top: 5px;
+    width: 16px;
+    z-index: 1000;
+}
+.magento_maximize {
+    background: url("magento/window_maximize.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 16px;
+    position: absolute;
+    right: 49px;
+    top: 5px;
+    width: 16px;
+    z-index: 1000;
+}
+.magento_title {
+    color: #FFFFFF;
+    float: left;
+    font: bold 12px/28px Arial,Helvetica,sans-serif;
+    text-align: left;
+    width: 100%;
+}
+.magento_content {
+    font-size: 12px;
+    overflow: auto;
+}
+.magento_content, .magento_content label {
+    color: #333333;
+    font-family: Arial,sans-serif;
+}
+.magento_buttons {
+    padding: 10px;
+    text-align: right;
+}
+.magento_buttons input.button {
+    background: url("magento/btn_bg.gif") repeat-x scroll 0 100% #FFAC47;
+    border-color: #ED6502 #A04300 #A04300 #ED6502;
+    border-style: solid;
+    border-width: 1px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font: bold 12px/18px Arial,Helvetica,sans-serif;
+    padding: 0 7px 1px;
+    text-align: center;
+    white-space: nowrap;
+}
+.pagination-container {
+    height: 740px;
+    margin-bottom: 35px;
+    overflow: hidden;
+    position: relative;
+    width: 816px;
+}
+.jTagRead {
+    height: 30px;
+    position: absolute;
+    width: 30px;
+}
+.jTagRead .circle {
+    background: url("../images/circle-show.png") repeat scroll 0 0 transparent;
+    height: 27px;
+    left: -15px;
+    top: -15px;
+    width: 27px;
+}
+* html .magento_close {
+    background-image: none;
+}
+* html .magento_minimize {
+    background-image: none;
+}
+* html .magento_maximize {
+    background-image: none;
+}
+.references-container   th,
+.references-container   td { padding:5px 10px; border:0px !important; }

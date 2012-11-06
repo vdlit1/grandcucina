@@ -1,0 +1,549 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <slink translate="label" module="slink">
+            <label>Slink</label>
+            <sort_order>600</sort_order>
+        </slink>
+    </tabs>
+    <sections>
+        <slinksettings translate="label" module="slink">
+            <class>separator-top</class>
+            <label>Settings</label>
+            <tab>slink</tab>
+            <sort_order>30</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <saasu translate="label">
+                    <label>Account Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>                    
+                    <fields>
+                        <fileuid translate="label">
+                            <label>File UID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <validate>required-entry</validate>                            
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>Please see Saasu Settings > Web Services for File UID. When config saved, Slink makes connection to fetch Accounts, Bank Accounts and Tax codes.</comment>
+                            <backend_model>slink/config_saasu_fileuid</backend_model>                             
+                        </fileuid>
+                        <wsaccesskey translate="label">
+                            <label>Web Services Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <validate>required-entry</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>Please see Saasu Settings > Web Services for Web Services Key. When config saved, Slink makes connection to fetch Accounts, Bank Accounts and Tax codes.</comment>
+                            <backend_model>slink/config_saasu_wsaccesskey</backend_model> 
+                        </wsaccesskey>   
+                        <endpoint translate="label">
+                            <label>Post URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <validate>required-entry</validate>                            
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default is "https://secure.saasu.com/webservices/rest/r1/".</comment>
+                        </endpoint>             
+                        <debug translate="label">
+                            <label>Debug</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>Turn debug on or off.</comment>
+                        </debug>                                                        
+                    </fields>
+                </saasu>
+                <sales>
+                    <label>Sales</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>                    
+                    <fields>
+                        <saasuSaleStatus translate="label">
+                            <label>Default status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>slink/config_salestatusoptions</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>Send sale as Quote, Order or Invoice.</comment>
+                        </saasuSaleStatus>
+                        <saleLayout>
+                            <label>Sale layout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>slink/config_layouts</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>Select service or item layout.</comment>                            
+                        </saleLayout>
+                        <saleAutoNumber translate="label">
+                            <label>Auto-number</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>Automatically assign invoice number.</comment>
+                        </saleAutoNumber>
+                        <salePrefix translate="label">
+                            <label>Invoice No. Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>If not Auto-number, add prefix to Quote/Sale/Invoice number.</comment>
+                            <depends><saleAutoNumber>0</saleAutoNumber></depends>
+                        </salePrefix>                        
+                        <createQuickPayment translate="label">
+                            <label>Create payment</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>                                                
+                            <comment>Create payment when sending sale.</comment>
+                        </createQuickPayment>        
+                        <bankAccountUid translate="label">
+                            <label>Default Bank Account Name</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>slink/config_bankaccounts</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>                                                
+                            <comment>Default Bank Account to allocate payments of all currencies, unless specified as exception below.</comment>
+                            <depends><createQuickPayment>1</createQuickPayment></depends>                            
+                        </bankAccountUid>                                                                                  
+                        <bankAccountCurrencyRegExp>
+                            <label>Manage payment currencies</label>
+                            <depends><createQuickPayment>1</createQuickPayment></depends>                                                                                    
+                            <frontend_model>slink/admin_config_regexceptions</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>                           
+                            <sort_order>61</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>                                                
+                            <comment>Define Bank Account exceptions for currencies. Specify Magento currency code (3-letter) and select Bank Account (e.g. AUD, Australian Bank Account).</comment>                        
+                        </bankAccountCurrencyRegExp>
+                        <saleTags translate="label">
+                            <label>Tags</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>Default tags to assign to invoice (separated by commas).</comment>
+                        </saleTags>                              
+                    </fields>                                    
+                </sales>
+                <items>
+                    <label>Items</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>                    
+                    <fields>
+                        <enableCreateUpdate translate="label">
+                            <label>Enable Create / Update</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>                            
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>Allow Slink to create and update Saasu Items.</comment>
+                        </enableCreateUpdate>  
+                        <defaultAssetAccountUid>
+                            <label>Default Asset account</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>slink/config_assettransactioncategories</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>For new items only. If list empty, see Account Settings.</comment>
+                            <depends><enableCreateUpdate>1</enableCreateUpdate></depends>
+                        </defaultAssetAccountUid>                        
+                        <defaultExpenseAccountUid>
+                            <label>Default Expense account</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>slink/config_expensetransactioncategories</source_model>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>For new items only. If list empty, see Account Settings.</comment>
+                            <depends><enableCreateUpdate>1</enableCreateUpdate></depends>
+                        </defaultExpenseAccountUid>                        
+                        <defaultIncomeAccountUid>
+                            <label>Default Income account</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>slink/config_incometransactioncategories</source_model>
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>For new items only. If list empty, see Account Settings.</comment>
+                            <depends><enableCreateUpdate>1</enableCreateUpdate></depends>
+                        </defaultIncomeAccountUid>   
+                        <defaultCoSAccountUid>
+                            <label>Default Cost of Sales account</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>slink/config_costransactioncategories</source_model>
+                            <sort_order>23</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>For new items only. If list empty, see Account Settings.</comment>
+                            <depends><enableCreateUpdate>1</enableCreateUpdate></depends>
+                        </defaultCoSAccountUid>                           
+                        <itemNotes translate="label">
+                            <label>Default Notes</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>For new items only. Default notes to add to Item.</comment>
+                            <depends><enableCreateUpdate>1</enableCreateUpdate></depends>                            
+                        </itemNotes>
+                        <shippingItemCode translate="label">
+                            <label>Shipping Item Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+                            <comment>Assign an item code for shipping fees.</comment>
+                        </shippingItemCode>
+                        <couponItemCode translate="label">
+                            <label>Coupon Item Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>Assign an item code for coupon discounts</comment>
+                        </couponItemCode>
+                        <discountItemCode translate="label">
+                            <label>Discount Item Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>Assign an item code for total order discounts</comment>
+                        </discountItemCode>                                                                        
+                    </fields>                
+                </items>
+                <contacts>
+                    <label>Contacts</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>                    
+                    <fields>
+                        <linkGuestContacts translate="label">
+                            <label>Link guest customers</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>YES to create new contact for guest customer. NO to use Default Name for Guest Sales.</comment>
+                        </linkGuestContacts>
+                        <guestContactUid translate="label">
+                            <label>Default Contact for Guest Sales</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>slink/config_contacts</source_model>                            
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>Contact name for guest sales.</comment>
+                            <depends><linkGuestContacts>0</linkGuestContacts></depends>
+                        </guestContactUid>
+                        <contactTags translate="label">
+                            <label>Tags</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>Default tags to add to contact (separated by commas).</comment>
+                        </contactTags>                              
+                    </fields>
+                </contacts>
+                <tax>
+                    <label>Tax</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>                    
+                    <fields>
+                        <saleTaxCode translate="label">
+                            <label>Sale Tax Code</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>slink/config_taxcodes</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>If list empty, see Account Settings.</comment>
+                        </saleTaxCode>       
+                        <saleTaxFreeCode translate="label">
+                            <label>Sale Tax Free Code</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>slink/config_taxcodes</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                                                
+                            <comment>If list empty, see Account Settings.</comment>
+                        </saleTaxFreeCode>
+                        <purchaseTaxCode translate="label">
+                            <label>Purchase Tax Code</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>slink/config_taxcodes</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If list empty, see Account Settings.</comment>
+                        </purchaseTaxCode>
+                        <purchaseTaxFreeCode translate="label">
+                            <label>Purchase Tax Free Code</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>slink/config_taxcodes</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If list empty, see Account Settings.</comment>
+                        </purchaseTaxFreeCode>
+                    </fields>                
+                </tax>                                
+            </groups>
+        </slinksettings>
+        <grandcucina_config translate="label" module="slink">
+            <class>separator-top</class>
+            <label>Tomkin Settings</label>
+            <tab>slink</tab>
+            <sort_order>30</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <tomkin_ftp>
+                    <label>FTP Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <ftp_host translate="label">
+                            <label>FTP host</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-url</validate>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>FTP host</comment>
+                        </ftp_host>
+                        <ftp_port translate="label">
+                            <label>FTP port</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-number</validate>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>FTP port</comment>
+                        </ftp_port>
+                        <ftp_username translate="label">
+                            <label>FTP username</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>FTP username</comment>
+                        </ftp_username>
+                        <ftp_password translate="label">
+                            <label>FTP host</label>
+                            <frontend_type>password</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>FTP password</comment>
+                        </ftp_password>
+                    </fields>
+                </tomkin_ftp>
+                <tomkin_items translate="label">
+                    <label>Products</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <ftp_path translate="label">
+                            <label>FTP folder path</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>FTP Folder to retrieve Product CSV from. E.g. /home/htdocs/path/</comment>
+                        </ftp_path >
+                        <itemCsvHeaderRow>
+                            <label>Product CSV header row</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Yes if Product CSV has header row.</comment>
+                        </itemCsvHeaderRow>
+                        <itemCsvColumns>
+                            <label>Product CSV Columns</label>
+                            <frontend_model>slink/admin_config_gcitemcsvcolumns</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Define expected columns for Product CSV. Case-sensitive.</comment>
+                        </itemCsvColumns>
+                        <enableItemCreateUpdate translate="label">
+                            <label>Enable product create</label>
+                            <frontend_type>select</frontend_type>
+                            <validate>required-entry</validate>                            
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enable create product.</comment>
+                        </enableItemCreateUpdate>
+                        <enableCategoryCreate translate="label">
+                            <label>Enable category create </label>
+                            <frontend_type>select</frontend_type>
+                            <validate>required-entry</validate>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>51</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If creating new Product, create and allocate category if it does not exist.</comment>
+                            <depends><enableItemCreateUpdate>1</enableItemCreateUpdate></depends>
+                        </enableCategoryCreate>
+                        <itemCategory translate="label">
+                            <label>Allocate Attribute / Tax </label>
+                            <frontend_model>slink/admin_config_gcitemcategory</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>52</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>Define Attribute set and Tax class</comment>
+                            <depends><enableItemCreateUpdate>1</enableItemCreateUpdate></depends>                            
+                        </itemCategory>
+                        <defaultTaxClassId>
+                            <label>Default tax class </label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>slink/config_gctaxclass</source_model>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default tax class to allocate to new Product</comment>
+                            <depends><enableItemCreateUpdate>1</enableItemCreateUpdate></depends>                            
+                        </defaultTaxClassId>
+                        <enableStockUpdate>
+                            <label>Enable stock-on-hand update </label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Update product quantity</comment>
+                        </enableStockUpdate>
+                        <enablePriceUpdate>
+                            <label>Enable price update </label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Update Manufacturers RRP (per GC buy unit).</comment>
+                        </enablePriceUpdate>
+                        <enableCostUpdate>
+                            <label>Enable unit cost update </label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Update product unit cost ex.</comment>
+                        </enableCostUpdate>                        
+                    </fields>
+                </tomkin_items>
+                <tomkin_sales translate="label">
+                    <label>Sales</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <ftp_path>
+                            <label>FTP folder path </label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>FTP folder to export Magento Order XML to.</comment>
+                        </ftp_path>
+                    </fields>
+                </tomkin_sales>
+            </groups>
+        </grandcucina_config>
+    </sections>
+</config>

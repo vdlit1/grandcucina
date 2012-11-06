@@ -1,0 +1,32 @@
+<!--
+/**
+ * AHT_Aslideshow Extension
+ *
+ * @category    Local
+ * @package     AHT_Aslideshow
+ * @author      dungnv (dungnv@arrowhitech.com)
+ * @copyright   Copyright(c) 2011 Arrowhitech Inc. (http://www.arrowhitech.com)
+ *
+ */
+
+/**
+ *
+ * @category   Local
+ * @package    AHT_Aslideshow
+ * @author     dungnv <dungnv@arrowhitech.com>
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/optionimages/styles.css</stylesheet></action>
+            <action method="addItem"><type>skin_js</type><script>js/optionimages/os.js</script></action>
+            <!--action method="addItem"><type>skin_js</type><script>js/optionimages/carousel.js</script></action-->
+        </reference>
+        <!-- <reference name="content">
+            <block type="optionimages/attribute" name="optionimages" ifconfig="aht_optionimages/general/enabled_images" template="optionimages/list.phtml">
+                <action method="setAttributeCode"><attribute_code>manufacturer</attribute_code></action>
+            </block>
+        </reference> -->
+    </default>
+</layout>

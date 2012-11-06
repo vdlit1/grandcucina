@@ -1,0 +1,20 @@
+<?php 
+	$currentCategory = Mage::registry('current_category');
+	$childrenIdArray = explode(',',$currentCategory->getChildren());
+	
+	$collection = Mage::getModel('catalog/category')->getCollection()
+		->addAttributeToFilter('entity_id', array('in' => $childrenIdArray))
+		->addAttributeToSelect('*');
+?>
+<div class="grid_4 cat-foot">
+	<h6><?php echo $currentCategory->getName().$this->__(' Products') ?></h6>
+	<ul>
+		<?php foreach ($collection as $_category): ?>
+			 <?php if($_category->getIsActive()): ?>
+				<li>
+					<a href="<?php echo $this->getCategoryUrl($_category) ?>"><?php echo $this->htmlEscape($_category->getName()) ?></a>
+				</li>
+			<?php endif; ?>
+		<?php endforeach ?>
+	</ul>
+</div>

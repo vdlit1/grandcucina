@@ -1,0 +1,30 @@
+<div style="" id="tagimage_tabs_content_section_content"><div class="entry-edit">
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend">Conent </h4>
+    <div class="form-buttons"></div>
+</div>
+    <div id="tagimage_form" class="fieldset ">
+    <div class="hor-scroll">
+                        <table cellspacing="0" class="form-list">
+            <tbody>
+                <tr>
+        <td class="label"><label for="tablabel">Tab label <span class="required">*</span></label></td>
+    <td class="value">
+        <input type="text" class="required-entry input-text required-entry" value="<?php echo $this->getRecord()->getTablabel(); ?>" name="tablabel" id="tablabel">            </td>
+    </tr>
+<tr>
+        <td class="label"><label for="content">Tab content <span class="required">*</span></label></td>
+    <td class="value">
+        <input type="text" class="required-entry input-text required-entry" value="<?php echo $this->getRecord()->getContent(); ?>" name="content" id="content">            </td>
+    </tr>
+<tr>
+        <td class="label"><label for="imagecontent">Image Content HTML</label></td>
+    <td class="value">
+        <textarea style="width: 500px; height: 300px" class=" textarea" cols="15" rows="2" name="imagecontent" id="imagecontent"><?php echo $this->getRecord()->getImagecontent(); ?></textarea>            </td>
+    </tr>
+            </tbody>
+        </table>
+            </div>
+        </div>
+</div>
+</div>

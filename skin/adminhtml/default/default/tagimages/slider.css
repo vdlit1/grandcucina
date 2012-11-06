@@ -1,0 +1,76 @@
+@import url("general.css");
+
+.pagination-container{
+	position: relative;
+	overflow: hidden;
+	/*width: 816px;
+	height: 449px;*/
+}
+.pagination-container .pagination-left,
+.pagination-container #galerie-video{
+	padding:0 0 6px 0;
+	background: url("images/bg-pagination-left.gif") 100% 0 no-repeat;
+}
+.pagination-container .pagination-bottom,
+.pagination-container .galerie-bottom{
+	padding:0 0 10px 0;
+	background: url("images/bg-pagination-bottom.gif") 0% 100% no-repeat;
+}
+
+.pagination-container .navigation-button{
+	/*position: absolute;*/
+	/*top: 160px;*/
+	/*  width: 811px;
+        height: 145px;*/
+}
+
+.pagination-container .navigation-button .next{
+    background: url("images/sprites.png") 0 -23px no-repeat;
+    height: 145px;
+    width: 46px;
+	float: right;
+	cursor:pointer;
+}
+
+.pagination-container .navigation-button .prev{
+   background: url("images/sprites.png") 0 -168px no-repeat;
+   height: 145px;
+   width: 46px;
+   float: left;
+   cursor:pointer;
+}
+.pagination-product-list{
+	position: relative;
+	overflow: hidden;
+        width: 811px;
+	border: 1px solid #909090;
+	margin:15px 0 35px 0;
+}
+.pagination-product-list .sliderProducts{
+	height:150px;
+}
+
+.pagination-product-list .navigation-button{
+	position: absolute;
+	top: 27px;
+	height: 96px;
+}
+
+.category-title-left{
+    float: left;
+    width: 90%; 
+}
+.video-category-right{
+    float: right;
+    padding-top: 6px;
+}
+.fb_edge_widget_with_comment{
+    display:none !important;
+
+}
+
+.category-title {
+    border-bottom: 1px solid black;
+    margin: 0 0 15px;
+    width: 809px;
+}

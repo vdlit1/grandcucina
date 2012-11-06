@@ -1,0 +1,21 @@
+/*  Cascade Style Sheet */
+     .pagination-container{
+        height: 443px;
+        width:  813px;
+      }
+     .pagination-container .slider,
+     .pagination-container .galerie{
+	width:810px !important;
+	height:440px!important;
+        position: relative;
+      }
+      .pagination-container .navigation-button .next{
+         position: absolute!important;
+         right:0px!important;
+         top:147.5px;
+      }
+      .pagination-container .navigation-button .prev {
+        position: absolute!important;
+        left:0px!important;
+        top:147.5px;
+      }

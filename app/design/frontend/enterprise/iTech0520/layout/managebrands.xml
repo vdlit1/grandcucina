@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <managebrands_index_index>
+        
+		<reference name="root">
+			<action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+		</reference>
+                 <reference name="head">
+                    <action method="addJs"><script>protoshow.js</script></action> 
+                </reference>
+		<reference name="right">
+			<block type="managebrands/managebrands" name="brand.right" template="managebrands/right.phtml" />
+		</reference>
+        <reference name="content">
+            <block type="managebrands/managebrands" name="managebrands" template="managebrands/managebrands.phtml" />
+			<block type="managebrands/managebrands" name="category.description" template="managebrands/foot.phtml"/>
+        </reference>
+		<reference name="main.after">
+            
+        </reference>
+    </managebrands_index_index>
+</layout> 

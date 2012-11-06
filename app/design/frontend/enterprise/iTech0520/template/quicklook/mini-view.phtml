@@ -1,0 +1,124 @@
+<?php
+	$_helper = $this->helper('catalog/output');
+	$_symbol = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+	$_product = Mage::registry('quickview_product');
+	$_coreHelper = $this->helper('core');
+	$_taxHelper  = $this->helper('tax');
+	$_finalPriceInclTax = $_taxHelper->getPrice($_product, $_product->getFinalPrice(), true);
+	$_PriceInclTax = $_taxHelper->getPrice($_product, $_product->getPrice(), true);
+	$_finalPrice = round($_finalPriceInclTax, 2);
+	$_finalPriceView = explode('.',$_finalPrice);
+	if(strlen($_finalPriceView[1]) == 1):
+		$_finalPriceView[1] = $_finalPriceView[1].'0';
+	else:
+		$_finalPriceView[1] = $_finalPriceView[1];
+	endif;
+?>
+<div class="quick-popup" style="display: block; " id="inline1">
+	<?php if($_product): ?>
+	<h5><?php echo $_product->getAttributeText('grandcucina_brands'); ?> <strong><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></strong></h5>
+	<div class="quick-popup-block">
+		<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(230,215); ?>" alt="" width="230" height="215">
+	</div>
+	<div class="quick-popup-right">
+		<div class="price">
+			<?php if($_product->getSetSizeInternal() != ''):?>
+				<?php if($_product->getSetSizeInternal() == 1):?>
+					<span class="set-size-internal">EACH</span>
+				<?php else:?>
+					<span class="set-size-internal">Set Of <?php echo $_product->getSetSizeInternal();?></span>
+				<?php endif;?>	
+			<?php endif;?>
+			<p class="price-box-view">
+				<span><?php echo $_symbol ?></span><?php echo $_finalPriceView[0] ?><?php if(isset($_finalPriceView[1])): ?><span>.<?php echo $_finalPriceView[1]; ?></span><?php endif; ?>
+			</p>
+		</div>
+		<?php if($_product->getMsrp() != ''):?>
+			<?php $_rrpPrice = $_taxHelper->getPrice($_product, $_product->getMsrp(), true);?>
+			<?php $_price = round($_rrpPrice, 2);?>
+			<?php $_save = round(100 - ($_finalPrice/$_price)*100); ?>
+			<h6><?php echo $this->__('RRP %s',Mage::helper('core')->currency($_rrpPrice,true,false)) ?><span><?php echo $this->__('Save %s', $_save).'%'; ?></span></h6>
+		<?php endif;?>
+		<?php $objView = new Mage_Catalog_Block_Product_View(); ?>
+		<form action="<?php echo $objView->getAddToCartUrl($_product) ?>" method="post" id="product_addtocart_form">
+			<div class="form-pop-quantity">
+				<label for="Quantity"><?php echo $this->__('Quantity') ?></label>
+				<input name="qty" type="text" id="Quantity" value="1">
+			</div>
+			<button type="button" onclick="productAddToCartForm.submit(this)" class="basket"><?php echo $this->__('Add to Basket') ?></button>
+			<?php $_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); ?>
+			<?php if ($this->helper('wishlist')->isAllow()) : ?>
+			<a href="<?php echo $_wishlistSubmitUrl ?>" onclick="productAddToCartForm.submitLight(this, this.href); return false;" class="wishlist">+ <?php echo $this->__('Add to Wislist') ?></a>
+			<?php endif; ?>
+		</form>
+		<?php
+			$_usedBy = $_product->getAttributeText('used_by');
+			if(count($_usedBy) > 3) {
+				$_usedByHtml = '';
+				for($i = 0; $i < 3; $i++) {
+					if($i<2) {
+						$_usedByHtml .= $_usedBy[$i].', ';
+					} else {
+						$_usedByHtml .= $_usedBy[$i].'...';
+					}
+				}
+			} else {
+				$_usedByHtml = implode(', ', $_usedBy);
+			}
+		?>
+		<?php if(count($_usedBy) > 1):?><p><strong><?php echo $this->__('Used by:') ?></strong> <?php echo $_usedByHtml ?></p><?php endif;?>
+		<a href="<?php echo $_product->getProductUrl(); ?>" class="view-all"><?php echo $this->__('View full product details') ?></a>
+	</div>
+	<?php endif; ?>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+	var productAddToCartForm = new VarienForm('product_addtocart_form');
+	productAddToCartForm.submit = function(button, url) {
+		if (this.validator.validate()) {
+			var form = this.form;
+			var oldUrl = form.action;
+
+			if (url) {
+			   form.action = url;
+			}
+			var e = null;
+			try {
+				this.form.submit();
+			} catch (e) {
+			}
+			this.form.action = oldUrl;
+			if (e) {
+				throw e;
+			}
+
+			if (button && button != 'undefined') {
+				button.disabled = true;
+			}
+		}
+	}.bind(productAddToCartForm);
+
+	productAddToCartForm.submitLight = function(button, url){
+		if(this.validator) {
+			var nv = Validation.methods;
+			delete Validation.methods['required-entry'];
+			delete Validation.methods['validate-one-required'];
+			delete Validation.methods['validate-one-required-by-name'];
+			// Remove custom datetime validators
+			for (var methodName in Validation.methods) {
+				if (methodName.match(/^validate-datetime-.*/i)) {
+					delete Validation.methods[methodName];
+				}
+			}
+
+			if (this.validator.validate()) {
+				if (url) {
+					this.form.action = url;
+				}
+				this.form.submit();
+			}
+			Object.extend(Validation.methods, nv);
+		}
+	}.bind(productAddToCartForm);
+//]]>
+</script>

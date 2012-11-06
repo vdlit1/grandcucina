@@ -1,0 +1,132 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<title><?php echo $this->getTitle() ?></title>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+//]]>
+</script>
+<![endif]-->
+<?php echo $this->getCssJsHtml() ?>
+  <script type="text/javascript">
+    var turnToConfig = {
+      siteKey: "UBdcAIqGrFbIT3hsite",
+      setupType: "overlay"
+    };
+
+    (function() {
+        var tt = document.createElement('script'); tt.type = 'text/javascript'; tt.async = true;
+        tt.src = document.location.protocol + "//static.www.turnto.com/traServer3/trajs/" + turnToConfig.siteKey + "/tra.js";
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tt, s);
+    })();
+  </script>
+
+   <style type="text/css">
+   /*default iteaser*/
+   #TT2ILTbox {
+     background-color: #f3f3f3;
+     border: 1px solid #d2d2d2;
+     padding: 10px;
+     text-align: center;
+     width: 280px;
+     margin-bottom: 10px;
+     margin-top: 10px;
+   }
+
+   #TT2ILTbox h2 {
+     font-size: 12px;
+     font-weight: bold;
+     margin: 5px 0 5px 0;
+   }
+
+   #TT2ILTcount-line * {
+     font-size: 11px;
+   }
+
+   #TT2ILTcount-line strong {
+     font: bold 11px Arial;
+   }
+
+   #TT2ILTcount-line p {
+     margin: 5px 0 5px 0;
+   }
+
+   #TT2ILTbutton-holder {
+     display: -moz-box !important;
+     display: block;
+     height: 31px;
+     text-align: center;
+   }
+
+   a.TT2ILTbutton, a.TT2ILTbutton span {
+     background-color: #fa6230;
+   }
+
+   .TT2ILTbutton * {
+     font: bold 12px Arial;
+
+   }
+
+   a.TT2ILTbutton {
+     background-image: url('http://static.www.turnto.com/tra2/images/iteaser/1/button-right.png');
+     background-repeat: no-repeat;
+     background-position: top right;
+     display: block;
+     height: 31px;
+     margin-right: 6px;
+     padding-right: 16px;
+     text-decoration: none;
+     color: white;
+   }
+
+   a.TT2ILTbutton span {
+     background-image: url('http://static.www.turnto.com/tra2/images/iteaser/1/button-left.png');
+     background-repeat: no-repeat;
+     display: block;
+     line-height: 22px;
+     padding: 2px 0 7px 18px;
+   }
+
+   a.TurnToIteaSee {
+     font-size: 11px;
+     text-decoration: none;
+     color: #000;
+     cursor: pointer;
+   }
+   </style>
+
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>

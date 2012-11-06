@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <catalog translate="label" module="attributemanager">
+            <groups>
+                <trendy_accessories translate="label">
+                    <label>Trendy accessories</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Is Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <cat translate="label">
+                            <label>Choose a category</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>attributemanager/system_config_source_category</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cat>
+                    </fields>
+                </trendy_accessories>
+            </groups>
+        </catalog>
+		<design translate="label">
+			<groups>
+				<header translate="label">
+					<fields>
+                        <background translate="label">
+                            <label>Header background</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </background>
+					</fields>
+				</header>
+			</groups>
+		</design>
+    </sections>
+</config>

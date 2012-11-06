@@ -1,0 +1,90 @@
+.select-custom{
+    position: absolute;
+    height: 36px;
+    overflow: hidden;
+	color:#959595;
+	font-size:11px
+}
+.limiter .select-custom{
+    width: 28px; /* With the padding included, the width is 45 pixels: the actual width of the image. */
+    padding: 3px 35px 0 20px;
+    background: url('../images/select-small.png') no-repeat;
+	text-align:left;
+}
+.checkoutcontainer  .select-custom{
+	  background: url("../images/arrow-select.jpg") no-repeat scroll 97% center transparent;
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 0 5px #CCCCCC;
+    color: #959595;
+    cursor: pointer;
+    display: block;
+    font: 12px/28px Helvetica,Arial,sans-serif;
+    height: 28px;
+    margin: 4px 5px 10px 0;
+    padding-left: 10px;
+    text-align: left;
+}
+.radio-custom {
+    background: url("../images/raido-img.png") no-repeat scroll 0 0 transparent;
+    clear: left;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 14px;
+    padding: 0 5px 0 0;
+    width: 15px;
+}
+
+.input-region .select-custom{width: 157px;}
+.input-country .select-custom{width: 88%;}
+.ccsave_cc_type .select-custom{width: 89%;}
+.card-year .select-custom{width: 117px;}
+.card-month .select-custom{width: 118px;}
+.limiter .display .select-custom{
+    width: 74px;
+    background: url('../images/select-normal.png') no-repeat;
+}
+.sort-by .select-custom{
+    width: 115px; /* With the padding included, the width is 45 pixels: the actual width of the image. */
+    padding: 3px 35px 0 20px;
+    background: url('../images/select-normal.png') no-repeat;
+}
+input.styled { /* display: none;  */}
+
+select.styled{
+    position: relative;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: 5;
+    height: 36px;
+    padding: 0 1px;
+    font-size: 12px
+}
+.limiter select.styled{
+    width: 72px;
+	margin-left:5px;
+}
+
+.sort-by select.styled{
+    width: 158px;
+	margin-left:5px;
+}
+
+.pager .limiter .display select{width:109px}
+
+.disabled-custom {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+.limiter .sort .styled{margin-right:3px}
+#onestepcheckout-form .input-box,#onestepcheckout-form .input-checkbox,.onestepcheckout-enable-newsletter,.onestepcheckout-enable-terms{position:relative;}
+#onestepcheckout-form .input-box input[type="checkbox"],#onestepcheckout-form .input-checkbox input[type="checkbox"],.onestepcheckout-enable-newsletter input[type="checkbox"],.onestepcheckout-enable-terms input[type="checkbox"]{ height: 17px;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 16px;
+    z-index: 999;filter:alpha(opacity=00);}
+.sp-methods .radio, .sp-methods .checkbox{opacity: 0;filter:alpha(opacity=00);;position: absolute;}	
+
+.input-different-shipping{  float: left;}

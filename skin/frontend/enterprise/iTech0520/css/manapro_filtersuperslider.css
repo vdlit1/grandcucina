@@ -1,0 +1,54 @@
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterSuperSlider
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+input.m-slider { width: 30px; }
+.dimensions .m-slider-span{
+    background: none;
+}
+.dimensions .m-filter-slider{
+    
+    background: url("../images/slider-bg2.jpg") repeat-x scroll right bottom transparent;
+    border: medium none;
+    clear: both;
+    height: 10px;
+    margin: 18px 0 11px;
+}
+.dimensions .m-slider-to{
+    background: none;
+}
+
+.dimensions .m-slider-values .m-slider-min-value {
+    display: none;
+   
+}
+.dimensions .m-slider-values .m-slider-max-value {
+     display: none;
+}
+.dimensions .m-slider-selected-value {
+    float: right;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #DDDDDD;
+    box-shadow: 0 0 5px #CCCCCC;
+    color: #333333;
+    float: right;
+    font-size: 12px;
+    height: 22px;
+    line-height: 22px;
+    margin-top: 4px;
+    padding: 3px 5px;
+    position: relative;
+    text-align: center;
+    width: 42px;
+
+}
+.dimension-name {
+    color: #898989;
+    font: bold 14px/28px Helvetica,Arial,sans-serif;
+    width: auto;
+    margin-top: 5px;
+	float:left;
+}
+.dimensions .m-slider-values input[type="text"] { float:right;}

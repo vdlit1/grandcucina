@@ -1,0 +1,12 @@
+/**
+ * @category    Mana
+ * @package     Mana_Filters
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/*.m-filter-item-list .m-selected-filter-item { color: red; }*/
+.m-filter-popup .m-selected-ln-item > a { font-weight: bold; text-decoration: none; }
+.m-slider-values label.price-symbol { float: left; width: auto; margin-right: 5px; font: 28px/30px 'LeagueGothicRegular', Helvetica, sans-serif; text-transform:uppercase; color:black;}
+.m-slider-values input[type="text"] { position: relative; float: left; width: 42px; height: 22px; padding: 3px 5px; margin-top: 4px; font-size: 12px; line-height: 22px; text-align: center; color: #333; border: 1px solid #ddd; box-shadow: 0 0 5px #ccc; background: #fff; behavior: url(_ui/js/PIE.htc); }
+.second-label { margin-left: 89px;}
+#dimensions_height_depth-m-from,#dimensions_length_diameter-m-from{float:right;}

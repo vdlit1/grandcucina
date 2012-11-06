@@ -1,0 +1,76 @@
+<?php 
+	 $data = Mage::getModel('megamenu/data')->getCatalog();
+	 /* foreach ($data as $key => $item) {
+		$i++;
+		$categoryId = $item['catalog_id'];
+		$categoryObject = Mage::getModel('catalog/category')->load($categoryId);
+		$categoryParentId = $categoryObject->getParentId();
+	} */
+?>
+<?php if(count($data)>0): ?>
+<div class="nav-container">
+    <div class="container1">
+        <div class="container2">
+            <ul id="menu">
+				<?php
+					if($this->getCurrentCategory()) {
+						$_pathIds = $this->getCurrentCategory()->getPathIds();
+					} else {
+						$_pathIds = array();
+					}					
+				?>
+				<?php $i=0; foreach ($data as $key => $item): $i++ ?>
+				<?php $categoryObject = Mage::getModel('catalog/category')->load($item['catalog_id']); ?>
+				<?php //echo '<pre>'; print_r($item['catalog_id']); die(); ?>
+				<li class="drop menu_left<?php if($i==1): ?> first<?php endif ?><?php if($i==count($data)): ?> last<?php endif ?><?php if(in_array($item['catalog_id'], $_pathIds)): ?> active<?php endif; ?>">
+					<a class="drop navlink" href="<?php echo $this->getCategoryUrl($categoryObject) ?>"><span class="sp-level0"><?php echo $item['title'] ?></span></a>
+					<div class="dropdowns dropdown_3column align_left" style="display: none;">
+						<div class="col_3">
+							<div class="dropdown">
+								<?php
+									$children = $categoryObject->getChildrenCategories();
+									$childrenCount = count($children);
+									$hasChildren = $children && $childrenCount;
+									$helper = Mage::helper('cms');
+									$processor = $helper->getPageTemplateProcessor();
+								?>
+								<?php if( $hasChildren ): ?>
+								<?php $arrCatId = $this->spilitCategory($children, $childrenCount) ?>
+								<div class="dropdown-block block-01">
+									<h3><?php echo $categoryObject->getName() ?> Categories</h3>
+									<?php foreach($arrCatId as $categories): ?>
+										<ul>
+											<?php foreach($categories as $catId): ?>
+											<?php $childrenCat = Mage::getModel('catalog/category')->load($catId);  ?>
+											<li class="<?php if(in_array($catId, $_pathIds)): ?>active<?php endif; ?>">
+												<a class="<?php if(in_array($catId, $_pathIds)): ?>active<?php endif; ?>" href="<?php echo $this->getCategoryUrl($childrenCat) ?>"><?php echo $childrenCat->getName() ?></a>
+											</li>
+											<?php endforeach ?>
+										</ul>
+									<?php endforeach; ?>
+								</div>
+								<?php endif ?>
+								<div class="dropdown-block block-02">
+									<?php echo $processor->filter($item['content_top']); ?>
+								</div>
+								<div class="dropdown-block block-03">
+									<?php echo $processor->filter($item['content_bottom']); ?>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				<?php endforeach ?>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+jQuery(function(){
+    jQuery('#menu').naviDropDown({
+            dropDownWidth: '960px'
+    });
+});
+</script>
+<?php endif ?>

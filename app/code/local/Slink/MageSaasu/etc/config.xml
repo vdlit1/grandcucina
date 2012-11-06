@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Slink_MageSaasu>
+            <version>2.0.2.GRANDCUCINA.2</version>
+        </Slink_MageSaasu>
+    </modules>
+    <admin>
+        <routers>
+            <slink>
+                <use>admin</use>
+                <args>
+                    <module>Slink_MageSaasu</module>
+                    <frontName>slink</frontName>
+                </args>
+            </slink>
+        </routers>
+    </admin>
+    <crontab>
+        <jobs>
+            <slink_schedules_run_all>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <run><model>slink/schedules::runAll</model></run>
+            </slink_schedules_run_all>
+        </jobs>
+    </crontab>
+    <adminhtml>
+        <menu>
+            <slink translate="title" module="slink">
+                <title>Slink</title>
+                <sort_order>80</sort_order>
+                <children>
+                    <sales translate="title" module="slink">
+                        <title>Sale Orders</title>
+                        <sort_order>0</sort_order>
+                        <action>slink/admin_sales</action>
+                    </sales>
+                    <items translate="title" module="slink">
+                        <title>Products</title>
+                        <sort_order>1</sort_order>
+                        <action>slink/admin_items</action>
+                    </items>                    
+                    <contacts translate="title" module="slink">
+                        <title>Customers</title>
+                        <sort_order>2</sort_order>
+                        <action>slink/admin_contacts</action>
+                    </contacts>                    
+                    <schedules translate="title" module="slink">
+                        <title>Schedules</title>
+                        <sort_order>3</sort_order>
+                        <action>slink/admin_schedules</action>        
+                        <children>
+                            <scheduled_tasks translate="title" module="slink">
+                                <title>Scheduled Tasks</title>
+                                <sort_order>1</sort_order>
+                                <action>slink/admin_schedules</action>        
+                            </scheduled_tasks>                                        
+                            <scripts translate="title" module="slink">
+                                <title>Add a Task Script</title>
+                                <sort_order>2</sort_order>
+                                <action>slink/admin_scripts/edit</action>                    
+                            </scripts>                                                               
+                        </children>            
+                    </schedules>   
+                    <slink_about translate="title" module="slink">
+                        <title>About</title>
+                        <sort_order>4</sort_order>                        
+                        <action>slink/admin_slink</action>
+                    </slink_about>
+                </children>
+            </slink>
+        </menu>
+        <acl>
+            <resources>           
+                <admin>
+                    <children>
+                        <slink translate="title" module="slink">
+                            <title>Slink</title>
+                            <sort_order>80</sort_order>
+                            <children>
+                                <sales translate="title">
+                                    <title>Link Sales</title>
+                                    <sort_order>1</sort_order>
+                                </sales>
+                                <items translate="title">
+                                    <title>Link Products</title>
+                                    <sort_order>2</sort_order>
+                                </items>         
+                                <contacts translate="title">
+                                    <title>Link Contacts</title>
+                                    <sort_order>3</sort_order>
+                                </contacts>      
+                                <schedules translate="title">
+                                    <title>Schedules</title>
+                                    <sort_order>4</sort_order>
+                                    <children>
+                                        <scheduled_tasks translate="title">
+                                            <title>Scheduled Tasks</title>
+                                            <sort_order>1</sort_order>
+                                        </scheduled_tasks>                                        
+                                        <scripts translate="title">
+                                            <title>Add a Task Script</title>
+                                            <sort_order>2</sort_order>
+                                        </scripts>                                                
+                                    </children>
+                                </schedules>                                                                                 
+                            </children>
+                        </slink>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <slinksettings translate="title" module="slink">
+                                            <title>Slink Configuration</title>
+                                            <sort_order>62</sort_order>
+                                        </slinksettings>
+                                        <grandcucina_config translate="title" module="slink">
+                                            <title>Grand Cucina</title>
+                                            <sort_order>62</sort_order>
+                                        </grandcucina_config>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>						
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>    
+    <global>
+        <helpers>
+            <slink>
+                <class>Slink_MageSaasu_Helper</class>
+            </slink>            
+        </helpers>
+        <blocks>
+            <slink>
+                <class>Slink_MageSaasu_Block</class>
+            </slink>
+        </blocks>
+        <models>
+            <slink>
+                <class>Slink_MageSaasu_Model</class>
+                <resourceModel>slink_mysql4</resourceModel>
+            </slink>
+            <slink_mysql4>
+                <class>Slink_MageSaasu_Model_Mysql4</class>
+                <entities>
+                    <slink_schedules>
+                        <table>slink_schedules</table> 
+                    </slink_schedules>
+                    <slink_scripts>
+                        <table>slink_scripts</table> 
+                    </slink_scripts>                    
+                    <slink_sales>
+                        <table>slink_sales</table> 
+                    </slink_sales>        
+                    <slink_items>
+                        <table>slink_items</table> 
+                    </slink_items>                            
+                    <slink_contacts>
+                        <table>slink_contacts</table> 
+                    </slink_contacts>        
+                    <slink_tax_code>
+                        <table>slink_tax_code</table> 
+                    </slink_tax_code>                                                
+                    <slink_transaction_category>
+                        <table>slink_transaction_category</table> 
+                    </slink_transaction_category>                            
+                    <slink_bank_account>
+                        <table>slink_bank_account</table> 
+                    </slink_bank_account>                                                                    
+                    <slink_config_contact>
+                        <table>slink_config_contact</table> 
+                    </slink_config_contact>                                                                                        
+                </entities>
+            </slink_mysql4>
+        </models>
+        <events>
+            <sales_order_save_after>
+                <observers>
+                    <slink_magesaasu_sales_create>
+                        <type>singleton</type>
+                        <class>slink/sales_observer</class>
+                        <method>create</method>
+                    </slink_magesaasu_sales_create>
+                </observers>
+            </sales_order_save_after>
+            <sales_order_delete_before>
+                <observers>
+                    <slink_magesaasu_sales_delete>
+                        <type>singleton</type>
+                        <class>slink/sales_observer</class>
+                        <method>delete</method>
+                    </slink_magesaasu_sales_delete>
+                </observers>
+            </sales_order_delete_before>
+            <catalog_product_save_after>
+                <observers>
+                    <slink_magesaasu_items_create>
+                        <type>singleton</type>
+                        <class>slink/items_observer</class>
+                        <method>create</method>
+                    </slink_magesaasu_items_create>
+                </observers>
+            </catalog_product_save_after>            
+            <catalog_product_delete_before>
+                <observers>
+                    <slink_magesaasu_items_delete>
+                        <type>singleton</type>
+                        <class>slink/items_observer</class>
+                        <method>delete</method>
+                    </slink_magesaasu_items_delete>
+                </observers>
+            </catalog_product_delete_before>                        
+            <customer_save_after>
+                <observers>
+                    <slink_magesaasu_contacts_create>
+                        <type>singleton</type>
+                        <class>slink/contacts_observer</class>
+                        <method>create</method>
+                    </slink_magesaasu_contacts_create>
+                </observers>
+            </customer_save_after>            
+            <customer_delete_before>
+                <observers>
+                    <slink_magesaasu_contacts_delete>
+                        <type>singleton</type>
+                        <class>slink/contacts_observer</class>
+                        <method>delete</method>
+                    </slink_magesaasu_contacts_delete>
+                </observers>
+            </customer_delete_before>                        
+        </events>
+        <resources>
+            <slink_setup>
+                <setup>
+                    <module>Slink_MageSaasu</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </slink_setup>
+            <slink_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </slink_write>
+            <slink_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </slink_read>
+        </resources>
+    </global>
+    <default>
+        <slinksettings>
+            <saasu>
+                <fileuid></fileuid>
+                <wsaccesskey></wsaccesskey>
+                <endpoint>https://secure.saasu.com/webservices/rest/r1/</endpoint>
+                <debug>0</debug>
+            </saasu>
+            <sales>
+                <saasuSaleStatus>0</saasuSaleStatus>
+                <saleLayout>I</saleLayout>
+                <saleAutoNumber>0</saleAutoNumber>
+                <salePrefix></salePrefix>
+                <createQuickPayment>1</createQuickPayment>
+                <bankAccountCurrencyRegExp></bankAccountCurrencyRegExp>
+                <saleTags></saleTags>                
+            </sales>
+            <items>
+                <enableCreateUpdate>0</enableCreateUpdate>
+                <defaultAssetAccountUid></defaultAssetAccountUid>
+                <defaultExpenseAccountUid></defaultExpenseAccountUid>
+                <defaultIncomeAccountUid></defaultIncomeAccountUid>
+                <itemNotes></itemNotes>
+                <shippingItemCode></shippingItemCode>
+                <couponItemCode></couponItemCode>
+                <discountItemCode></discountItemCode>
+            </items>
+            <contacts>
+                <linkGuestContacts>0</linkGuestContacts>
+                <guestContactName>Magento Online Sales</guestContactName>
+                <contactTags></contactTags>
+            </contacts>
+            <tax>
+                <saleTaxCode></saleTaxCode>
+                <saleTaxFreeCode></saleTaxFreeCode>
+            </tax>
+        </slinksettings>
+    </default>
+</config>

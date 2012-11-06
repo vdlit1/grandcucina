@@ -1,0 +1,208 @@
+<style type="text/css">#loading-mask{z-index:9999; } </style>
+<div class="content-header">
+<table cellspacing="0">
+    <tr>
+        <td style="width:50%;"><h3 class="icon-head head-blog"><?php echo Mage::helper('tagimage')->__('Images Manager') ?></h3></td>
+        <td class="form-buttons"><button style="" onclick="setLocation('<?php echo $this->getUrl('tagimage/adminhtml_tags/index') ?>')" class="scalable save" type="button" id=""><span><?php echo $this->__('Save Config'); ?></span></button></td>
+    </tr>
+</table>
+</div>
+<div>
+    <h3><?php echo $this->__('Help Information'); ?></h3>
+    <div  class="side-col" style="width:19%">
+        <div id="accordion">
+            <h3 style="padding-left:20px"><a href="#"><?php echo $this->__('Step 1'); ?></a></h3>
+            <div>
+                    <div style="padding-left:20px">
+                       <p> <?php echo $this->__('I. Please selected an area on images') ?></p>
+                       <p><?php echo $this->__('II. You can resize area and move it to any where in images') ?></p>
+
+                    </div>
+            </div>
+            <h3 style="padding-left:20px"><a href="#"><?php echo $this->__('Step 2'); ?></a></h3>
+            <div>
+                    <div style="padding-left:20px">
+                        <p><?php echo $this->__('I. Click to add icon to load product') ?></p>
+                        <p><?php echo $this->__('II. Select an product to assign on image ') ?></p>
+                        <p><?php echo $this->__('III. You can click submit bottom to save it') ?></p>
+                    </div>
+            </div>
+
+        </div>
+        <div style="padding-top:90px; padding-left:30px; display:none" id="processing">
+            <img src="<?php echo $this->getSkinUrl('tagimages/images/ajax-loader_1.gif') ?>" />
+            <span><?php echo $this->__('Processing..') ?></span>
+        </div>
+    </div>
+    <script type="text/javascript">
+//	jQuery(function() {
+//		jQuery( "#accordion" ).accordion();
+//	});
+	</script>
+
+    <div class="entry-edit"  style="float:right ; width: 80%">
+        <div class="entry-edit-head" style="cursor: -moz-grab;"><h4 class="icon-head head-customer-sales-statistics"><?php echo $this->__('Tags this image') ?></h4></div>
+    <div class="grid">
+        <table cellspacing="0" class="data">
+            <thead>
+                <tr class="headings">
+                    <th width="815px"  style="text-align: center"><?php echo $this->__('Images Id #'.$this->getRequest()->getParam('id')); ?></th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr style="background-color:#FAFAFA" >
+
+                    <td style="background-color:#FAFAFA">
+                        <div class="pagination-container" style="margin: auto; padding-top: 2px;">
+                            <div class="pagination-left" id="image-categories">
+                                    <div class="pagination-bottom">
+                                     <div  class="slider" style="cursor:crosshair">
+                                            <?php
+                                                                                             $param = $this->getRequest()->getParam('id');
+                                                                                             $tagsId =  $this->getRequest()->getParam('tag');
+                                                                                             if(isset($param)):
+                                                                                                        foreach($this->getImageProcess($param) as $images):
+                                                                                                             ?>
+                                                         <div style="position: relative">
+                                                                <?php echo $this->getOverlayHtml($tagsId); ?>
+                                                          </div>
+                                                        <img style="cursor: crosshair"  src="<?php echo $this->helper('tagimage/image')->init($images['file'])->keepFrame(true)->resize(Mage::getSingleton('tagimage/config')->getWidht(),Mage::getSingleton('tagimage/config')->getHeight()); ?><?php //echo  Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'ibanner'.$images['file'];  ?>" id="img1"  />
+                                                      <?php
+                                                                                                        endforeach;
+                                                                                                 endif;
+                                                                                                ?>
+                                         </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+             <tbody>
+                <tr class="no-display"><td colspan="2"></td></tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+
+ <script type="text/javascript">
+
+</script>
+
+</div>
+<?php $page =  $this->getRequest()->getParam('page');?>
+<?php $filter = $this->getRequest()->getParam('product_filter'); ?>
+<script type="text/javascript">
+ function Close(){
+     jQuery(".overlay").removeClass('overlay_magento');
+     jQuery("#catalog-wysiwyg-editor").hide();
+ }
+</script>
+<div id="catalog-wysiwyg-editor" class="dialog popup-window" style="<?php if(isset($page) || isset($filter)){ echo 'left: 150.5px; top: 200.5px; z-index: 1008; width: 962px; height: 586px;'; } else{ echo 'display: none; left: 150.5px; top: 200.5px; z-index: 1008; width: 962px; height: 586px;'; } ?>  ">
+    <div id="catalog-wysiwyg-editor_close" class="magento_close" onclick="Close()"> </div>
+    <table class="top table_window" id="catalog-wysiwyg-editor_row1">
+        <tbody>
+            <tr>
+                <td class="magento_nw top_draggable"></td>
+                <td class="magento_n">
+                        <div class="magento_title title_window top_draggable">PRODUCT LIST</div></td>
+                 <td class="magento_ne top_draggable"></td>
+            </tr>
+        </tbody></table>
+    <table class="mid table_window">
+        <tbody>
+            <tr>
+                <td class="magento_w"></td>
+                <td valign="top" class="magento_content" id="catalog-wysiwyg-editor_table_content">
+                    <div class="magento_content" id="catalog-wysiwyg-editor_content" style="height: 555px; width: 950px; overflow: hidden;">
+                        <div id="product-grid">
+                         <?php //echo $this->getProductCollection(); ?>
+                        </div>
+                        <div class="magento_buttons">
+                            <input type="button" class="form-button  ok_button" onclick="save()" value="Submit">
+                            <input type="button" class="form-button  cancel_button" onclick="Close()" value="Cancel">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div id="overlay_modal" class="overlay <?php if(isset($page)||isset($filter)){ echo 'overlay_magento'; }?>" ></div>
+<input type="hidden" name="url" id="urltags" value="<?php echo $this->getUrl('tagimage/adminhtml_tags/saveedit')?>" />
+<input name="form_key" id="formkey" type="hidden" value="<?php echo $this->getFormKey(); ?>" />
+<input name="image_id" id="image_id" type="hidden" value="<?php echo $this->getRequest()->getParam('id'); ?>" />
+<script type="text/javascript">
+    jQuery(function() {
+		jQuery( "#catalog-wysiwyg-editor" ).draggable();
+	});
+ </script>
+<script type="text/javascript">
+    jQuery(function() {
+		jQuery( ".jTagTag").draggable();
+                jQuery(".jTagTag").resizable();
+              //  jQuery( ".entry-edit" ).draggable();
+	});
+ </script>
+
+<script type="text/javascript">
+    jQuery(function() {
+         jQuery(".jTagload").click(function(){
+             loadProduct();
+             });
+            jQuery('.jTagSaveBtn').click(function(){
+                var el = '#edit_tags';
+                var offset  = jQuery(el).position();
+                var top  = Math.round(offset.top);
+                var left = Math.round(offset.left);
+                var height = jQuery(el).height();
+                var width = jQuery(el).width();
+                var sku = jQuery('#productsku').val();
+                var label = jQuery('#jTagLabel').val();
+                var url       = jQuery('#urltags').val();
+                var key       = jQuery('#formkey').val();
+                var img_id = jQuery('#image_id').val();
+                var tag_id = jQuery('#tags_id').val();
+                  jQuery.ajax({url:url, type:"POST",data:({form_key:key, image_id:img_id,tag_id:tag_id, sku:sku, height  :height , width  :width,top:top,  left:left, label:label}),async:false,beforeSend:function(){jQuery('#processing').show(); },success:function(response){ jQuery('#processing').hide('slow');}})
+            });
+    });
+
+ </script>
+
+
+
+<script type="text/javascript">
+    function save(){
+        $$('input.tagproduct').each(function(e){
+            if(e.checked){
+                 Close();
+                 $('jTagLabel').value = e.value;
+                 $('productsku').value = e.id;
+            }
+         });
+    }
+    function loadProduct(){
+        var   url       = '<?php  echo $this->getUrl('tagimage/adminhtml_tags/loadProduct'); ?>';
+        new Ajax.Request(url, {
+             method:'post',
+             parameters: {id : '<?php echo $this->getRequest()->getParam('id'); ?>', 'internal_product':''},
+             onCreate:function(){
+             },
+             onComplete:function(){
+
+            },
+             onSuccess: function(transport) {
+                      $('product-grid').update(transport.responseText);
+                      jQuery(".overlay").addClass('overlay_magento');
+                      jQuery("#catalog-wysiwyg-editor").show();
+                      jQuery("#catalog-wysiwyg-editor_close").click(function(){
+                          jQuery(".overlay").removeClass('overlay_magento');
+                          jQuery("#catalog-wysiwyg-editor").hide();
+                      });
+             }
+
+            });
+    }
+  </script>

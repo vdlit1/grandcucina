@@ -1,0 +1,57 @@
+<?php if(Mage::getStoreConfig('aht_optionimages/general/enabled_images')): ?>
+    <?php $_optionValue = $this->getAllOptionValue(); ?>
+    <?php if(is_array($_optionValue) && count($_optionValue) > 0): ?>
+    <div id="Carousel2" class="carousel">
+        <div class="button navButton previous">Back</div>
+        <div class="button navButton next">More</div>
+        <div class="container">
+            <div class="items">
+                <?php foreach($_optionValue as $_value): ?>
+                    <div class="item">
+                    <div class="key caption"><?php echo $_value['value']; ?></div>
+                        <div class="icon">
+                            <a class="" title="<?php echo $_value['value']; ?>" href="">
+                                <img width=145 height=122 alt="<?php echo $_value['value']; ?>" src="<?php echo Mage::getBaseUrl('media').DS.'image_color'.DS.$_value['filename'] ?>" />
+                            </a>
+                        </div>
+                    </div>   
+                <?php endforeach; ?>           
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var AppBehavior = Class.create();
+        AppBehavior.Load = function() {
+            OS.RegisterBehaviour(AppBehavior.CarouselRules);
+        }
+        AppBehavior.CarouselRules = {
+            '#Carousel2': function(element) {
+                //Pictures
+                AppBehavior.PictureCarousel = new Carousel('PictureCarousel', element, 70, 70, AppBehavior, {
+                    setSize: 3,
+                    duration: .5,
+                    direction: 'horizontal',
+                    itemParser: function(item) {
+                        //Given html element you can build a data object for the item if needed for later activation
+                        //var sKey = item.down('.key').innerHTML;
+                        //var sCaption = item.down('.caption').innerHTML;
+                        //var sPictureHtml = item.down('.picture').innerHTML;
+                        return {};
+                    },
+                    setItemEvents: function(carousel, itemElement, carouselItem, observer) {
+                        //This allows you to set events to the item like rollovers/mouse events
+                        Event.observe(itemElement, 'click', function() {
+                            carousel.activate(carouselItem);
+                        });
+                    },
+                    allowAutoLoopOnSet: true,
+                    allowAutoLoopOnIndividual: true
+                });
+                AppBehavior.PictureCarousel.load();
+            }
+        }
+        AppBehavior.Load();
+	
+    </script>
+    <?php endif; ?>
+<?php endif; ?>

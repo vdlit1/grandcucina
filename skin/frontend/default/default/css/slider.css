@@ -1,0 +1,234 @@
+@import url("general.css");
+.pagination-container{
+	position: relative;
+	overflow: hidden;
+
+         margin: auto auto 25px;
+}
+.pagination-container .pagination-left,
+.pagination-container #galerie-video{
+	padding:0 0 6px 0;
+	background: url("../images/bg-pagination-left.gif") 100% 0 no-repeat;
+}
+.pagination-container .pagination-bottom,
+.pagination-container .galerie-bottom{
+	padding:0 0 10px 0;
+	background: url("../images/bg-pagination-bottom.gif") 0% 100% no-repeat;
+}
+.pagination-container .slider,
+.pagination-container .galerie{
+
+}
+.pagination-container .navigation-button{
+	/*position: absolute;
+	top: 160px;
+	height: 145px;*/
+}
+
+..pagination-container .navigation-button .next{
+    background: url("../images/sprites.png") 0 -23px no-repeat;
+    height: 145px;
+    width: 46px;
+	float: right;
+	cursor:pointer;
+}
+
+.pagination-container .navigation-button .prev{
+   background: url("../images/sprites.png") 0 -168px no-repeat;
+   height: 145px;
+   width: 46px;
+   float: left;
+   cursor:pointer;
+}
+
+
+.pagination-product-list{
+	position: relative;
+	overflow: hidden;
+    width: 811px;
+	border: 1px solid #909090;
+	margin:15px 0 35px 0;
+}
+.pagination-product-list .sliderProducts{
+	height:150px;
+}
+
+.pagination-product-list .navigation-button{
+	position: absolute;
+	top: 27px;
+	height: 96px;
+}
+.pagination-container .navigation-button .next{
+    background: url("../images/sprites.png") 0 -23px no-repeat;
+    height: 145px;
+    width: 46px;
+	float: right;
+	cursor:pointer;
+}
+
+.pagination-container .navigation-button .prev{
+   background: url("../images/sprites.png") 0 -168px no-repeat;
+   height: 145px;
+   width: 46px;
+   float: left;
+   cursor:pointer;
+}
+.pagination-product-list .sliderProducts .item{
+	width:135px;
+	text-align:center;
+	margin:5px 0;
+}
+.pagination-product-list .sliderProducts .item a{
+	width:100%;
+	display:block;
+	text-decoration:none;
+	color:#4a4a4a;
+	font-weight:bold;
+	line-height:30px;
+}
+
+.video-button {
+    background: url("../images/sprites.png") no-repeat scroll 100% -698px transparent;
+    float: right;
+    margin-right: 15px;
+    padding-right: 22px;
+    text-decoration: none !important;
+    color: black;
+    font-weight: bold;
+}
+.category-title-left{
+    float: left;
+    width: 90%;
+}
+.video-category-right{
+    float: right;
+    padding-top: 6px;
+}
+.fb_edge_widget_with_comment{
+    display:none !important;
+
+}
+
+.category-title {
+    border-bottom: 1px solid black;
+    margin: 0 0 15px;
+    width: 809px;
+}
+
+
+
+
+#slider ul,
+#slider li,
+#slider2 ul,
+#slider2 li{
+	margin:0;
+	padding:0;
+	list-style:none;
+	}
+#slider2{margin-top:1em;}
+#slider li,
+#slider3 li{
+	height: 439px;
+	width:811px!important;
+	overflow:hidden;
+}
+#slider2 li{
+	height: 160px;
+	width:811px!important;
+	overflow:hidden;
+}
+#prevBtn,
+#nextBtn,
+#slider1next, #slider1prev{
+	display:block;
+	position:absolute;
+	left:0;
+	top:155px;
+	z-index:1000;
+	font-size:0;
+}
+	#nextBtn, #slider1next{
+		left:766px;
+		}
+	#prevBtn a, #nextBtn a,
+	#slider1next a, #slider1prev a{
+		background: url("../images/sprites.png") 0 -168px no-repeat;
+		height: 145px;
+		width: 46px;
+		float: left;
+		cursor:pointer;
+		}
+	#nextBtn a, #slider1next a{
+		background: url("../images/sprites.png") 0 -23px no-repeat;
+		}
+
+	/* numeric controls */
+
+	ol#controls{
+		margin:1em 0;
+		padding:0;
+		height:28px;
+		}
+	ol#controls li{
+		margin:0 10px 0 0;
+		padding:0;
+		float:left;
+		list-style:none;
+		height:28px;
+		line-height:28px;
+		}
+	ol#controls li a{
+		float:left;
+		height:28px;
+		line-height:28px;
+		border:1px solid #ccc;
+		background:#DAF3F8;
+		color:#555;
+		padding:0 10px;
+		text-decoration:none;
+		}
+	ol#controls li.current a{
+		background:#5DC9E1;
+		color:#fff;
+		}
+	ol#controls li a:focus, #prevBtn a:focus, #nextBtn a:focus{outline:none;}
+
+.pagination-product-listt{
+	position:relative;
+
+}
+.pagination-product-list #slider2{
+
+}
+.pagination-product-list #prevBtn2,
+.pagination-product-list #nextBtn2,
+.pagination-product-list #slider1next,
+.pagination-product-list #slider1prev{
+	display:block;
+	position:absolute;
+	left:0;
+	top:30px;
+	z-index:1000;
+	font-size:0;
+}
+.pagination-product-list #nextBtn2,
+.pagination-product-list #slider1next{
+	left:783px;
+}
+
+.pagination-product-list #prevBtn2 a,
+.pagination-product-list #nextBtn2 a,
+.pagination-product-list #slider1next a,
+.pagination-product-list #slider1prev a{
+	background: url("../images/sprites.png") repeat scroll 0 -409px transparent;
+	height: 96px;
+	width: 31px;
+	float: left;
+	cursor:pointer;
+}
+.pagination-product-list  #nextBtn2 a,
+.pagination-product-list  #slider1next a{
+	background: url("../images/sprites.png") repeat scroll 0 -313px transparent;
+}
+
